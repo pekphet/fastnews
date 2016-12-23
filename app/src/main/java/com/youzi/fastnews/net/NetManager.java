@@ -134,7 +134,7 @@ public class NetManager implements Constants {
                 .get(mContext, mHandler);
     }
 
-    public void loginIn(INetCallback<RegisterResponseEntity> callback, String accessToken, String openId, String uniquid, String unionId, String nickname, String sex, String headimgurl, String parentID) {
+    public void loginIn(INetCallback<RegisterResponseEntity> callback, String accessToken, String openId, String unionId, String nickname, String sex, String headimgurl, String parentID) {
         new RequestHelper<ResponseWechatLoginEntity>().Method(RequestHelper.Method.POST)
                 .Url("http: //60.205.58.24: 8084/api/user/wechat_login")
                 .PostParam(REQUEST_PARAM_REGISTER_OPENID, accessToken)

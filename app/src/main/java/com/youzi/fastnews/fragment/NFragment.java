@@ -8,11 +8,13 @@ import android.widget.TextView;
 
 import com.youzi.fastnews.App;
 import com.youzi.fastnews.R;
+import com.youzi.fastnews.adapter.NewsListAdapter;
 import com.youzi.fastnews.entity.NewsDResp;
 import com.youzi.fastnews.entity.NewsListResp;
 import com.youzi.fastnews.net.INetCallback;
 
 import cc.fish.coreui.BaseFragment;
+import cc.fish.coreui.view.xlistview.XListView;
 
 
 /**
@@ -27,11 +29,14 @@ public class NFragment extends BaseFragment {
     private LinearLayout mLlBtnGrp;
     private NewsListResp mNList = null;
     private boolean isScrolling = false;
-    public LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(getItemWidth(PIECES), LinearLayout.LayoutParams.MATCH_PARENT);
+    public LinearLayout.LayoutParams params = null;
 
     private int cCid = 0;
     private int cCid2 = 0;
     private int page = 1;
+    private XListView mXl;
+
+    private int ccl = 0;
 
 
     @Override
@@ -39,6 +44,7 @@ public class NFragment extends BaseFragment {
         View v = inflater.inflate(R.layout.f_n, null);
         mScrollView = (HorizontalScrollView) v.findViewById(R.id.scroll);
         mLlBtnGrp = (LinearLayout) v.findViewById(R.id.ll_btns);
+        mXl = (XListView) v.findViewById(R.id.xlv);
         return v;
     }
 
@@ -56,24 +62,43 @@ public class NFragment extends BaseFragment {
 
             }
         });
+        params = new LinearLayout.LayoutParams(getItemWidth(PIECES), LinearLayout.LayoutParams.MATCH_PARENT);
     }
 
     private void flushUI() {
-        initList();
+        initList(ccl);
+        App.getNetManager().loadNewsCategory(new INetCallback<NewsDResp>() {
+            @Override
+            public void Success(NewsDResp newsDResp) {
+                mXl.setAdapter(new NewsListAdapter(getActivity(), newsDResp.getRows()));
+            }
+
+            @Override
+            public void Failed(String msg) {
+
+            }
+        });
     }
 
-    private void initList() {
+    private void initList(int is) {
         if (mNList == null) {
             return;
         }
+        mLlBtnGrp.removeAllViews();
         for (int i = 0; i < mNList.getRows().size(); i++) {
-            TextView tv = new TextView(getActivity());
+            View v = LayoutInflater.from(getActivity()).inflate(R.layout.i_hd, null);
+            TextView tv = (TextView) v.findViewById(R.id.tv);
             tv.setText(mNList.getRows().get(i).getCategory_name());
-            tv.setLayoutParams(params);
+            v.setLayoutParams(params);
+            if (i == is) {
+                tv.setBackgroundResource(R.drawable.r_shape);
+                tv.setTextColor(0xff00bbf5);
+            }
             int finalI = i;
-            tv.setOnClickListener(v -> {
-                onItemClick(tv, finalI);
+            v.setOnClickListener(vvvv  -> {
+                onItemClick(v, finalI);
             });
+            mLlBtnGrp.addView(v);
         }
     }
 
@@ -83,15 +108,12 @@ public class NFragment extends BaseFragment {
     }
 
     private void onItemClick(View item, int index) {
-        int itemWidth = item.getWidth();
-        if (!isScrolling) {
-            if (index > 5) {
-                index = 5;
-            } else if (index < 2) {
-                index = 2;
-            }
-            mScrollView.smoothScrollTo((index - 2) * itemWidth, 40);
+        if (ccl == index) {
+            return;
         }
+        int itemWidth = item.getWidth();
+        initList(index);
+        ccl = index;
         cCid = mNList.getRows().get(index).getParent_id();
         cCid2 = mNList.getRows().get(index).getId();
         App.getNetManager().loadNewsCategory(cCid, cCid2, page, new INetCallback<NewsDResp>() {
@@ -104,6 +126,16 @@ public class NFragment extends BaseFragment {
 
             }
         });
+        if (!isScrolling) {
+            if (index > 5) {
+                index = 5;
+            } else if (index < 2) {
+                index = 2;
+            }
+            if (mNList.getRows().size() > 5) {
+                mScrollView.smoothScrollTo((index - 2) * itemWidth, 40);
+            }
+        }
     }
 
     private void freshList(NewsDResp newsDResp) {

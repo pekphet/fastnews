@@ -122,6 +122,22 @@ public class NetManager implements Constants{
 
     }
 
+    public void loadNewsCategory(INetCallback<NewsDResp> callback) {
+        new RequestHelper<NewsDRespD>().Method(RequestHelper.Method.GET)
+                .Url(NEWS_CATEGORY_URL)
+                .Result(NewsDRespD.class)
+                .Success(result -> {
+                    if (((NewsDRespD)result).getCode() != 0) {
+                        callback.Failed(((NewsDRespD)result).getMsg());
+                    } else {
+                        NewsDResp data = ((NewsDRespD)result).getData();
+                        callback.Success(data);
+                    }
+                })
+                .Failed(msg -> callback.Failed((String) msg))
+                .get(mContext, mHandler);
+    }
+
     public void login(String accessToken, String openId, String parentId, String nickName, String headimgurl,INetCallback<LoginE> callback) {
         new RequestHelper<LoginRespD>().Method(RequestHelper.Method.POST)
                 .Url(LOGIN_URL)

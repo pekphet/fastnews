@@ -15,5 +15,9 @@
             android:background="#00BBF5"
             android:orientation="horizontal" />
     </HorizontalScrollView>
+    <cc.fish.coreui.view.xlistview.XListView
+        android:id="@+id/xlv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

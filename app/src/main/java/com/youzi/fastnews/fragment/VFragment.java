@@ -3,6 +3,8 @@ package com.youzi.fastnews.fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.youzi.fastnews.R;
+
 import cc.fish.coreui.BaseFragment;
 
 /**
@@ -12,16 +14,14 @@ import cc.fish.coreui.BaseFragment;
 public class VFragment extends BaseFragment{
     @Override
     protected View initView(LayoutInflater inflater) {
-        return null;
+        return inflater.inflate(R.layout.f_p, null);
     }
 
     @Override
     protected void initData() {
-
     }
 
     @Override
     protected void click(View v) {
-
     }
 }

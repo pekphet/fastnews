@@ -15,6 +15,7 @@ import com.youzi.fastnews.entity.NewsListRespD;
 import com.youzi.fastnews.entity.ResponseWechatLoginEntity;
 import com.youzi.fastnews.entity.ResponseWechatUserInfoEntity;
 import com.youzi.fastnews.global.WechatConstants;
+import com.youzi.fastnews.utils.DeviceUtils;
 
 import cc.fish.fishhttp.net.RequestHelper;
 
@@ -127,7 +128,7 @@ public class NetManager implements Constants{
                 .Result(LoginRespD.class)
                 .PostParam("access_token",  accessToken, true)
                 .PostParam("openid",        openId)
-                .PostParam("uniqueid",      "IMEI")
+                .PostParam("uniqueid",      DeviceUtils.getIMEI(mContext))
                 .PostParam("nickname",      nickName)
                 .PostParam("headimgurl",    headimgurl)
                 .PostParam("parent_id",     parentId)

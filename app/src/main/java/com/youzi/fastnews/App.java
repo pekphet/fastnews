@@ -2,6 +2,7 @@ package com.youzi.fastnews;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.widget.Toast;
 
 import com.tencent.mm.sdk.openapi.IWXAPI;
@@ -18,7 +19,7 @@ import ac.fish.utils.adcore.ADUtils;
 public class App extends Application {
 
     private static NetManager mNetManager;
-    private static String token;
+    private static String token = null;
 
     private static Context mAppContext;
 
@@ -47,11 +48,19 @@ public class App extends Application {
     }
 
     public static String getToken() {
+        if (token == null) {
+            SharedPreferences sp = mAppContext.getSharedPreferences("token", MODE_PRIVATE);
+            token = sp.getString("token", "");
+        }
         return token;
     }
 
     public static void setToken(String Token) {
         token = Token;
+        SharedPreferences sp = mAppContext.getSharedPreferences("token", MODE_PRIVATE);
+        SharedPreferences.Editor e = sp.edit();
+        e.putString("token", Token);
+        e.commit();
     }
 
     private void initIWXAPI() {

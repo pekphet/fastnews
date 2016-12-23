@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FastNews</string>
+    <string name="a">恭喜，你的提现申请已经成功受理，我们将在工作日48小时打款到您的微信余额中，请注意查收。</string>
+    <string name="b">您的提现申请失败了，请您返回重新提现!</string>
 </resources>

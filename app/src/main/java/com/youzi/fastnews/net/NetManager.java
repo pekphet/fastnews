@@ -9,6 +9,9 @@ import com.youzi.fastnews.entity.NewsDResp;
 import com.youzi.fastnews.entity.NewsDRespD;
 import com.youzi.fastnews.entity.NewsListResp;
 import com.youzi.fastnews.entity.NewsListRespD;
+import com.youzi.fastnews.entity.ResponseWechatLoginEntity;
+import com.youzi.fastnews.entity.ResponseWechatUserInfoEntity;
+import com.youzi.fastnews.global.WechatConstants;
 
 import cc.fish.fishhttp.net.RequestHelper;
 
@@ -65,6 +68,54 @@ public class NetManager implements Constants{
                 })
                 .Failed(msg -> callback.Failed((String) msg))
                 .get(mContext, mHandler);
+    }
+
+
+    /**
+     * @param callback 微信获取 ACCESS_TOKEN 接口
+     */
+    public void loadWecahtAccessTokenRequest(INetCallback<ResponseWechatLoginEntity> callback, String GET_REQUEST_ACCESS_TOKEN) {
+        new RequestHelper<ResponseWechatLoginEntity>().Method(RequestHelper.Method.GET)
+                .Url(GET_REQUEST_ACCESS_TOKEN)
+                .Success(result -> {
+
+                    String errcode = ((ResponseWechatLoginEntity) result).getErrcode();
+                    String errmsg = ((ResponseWechatLoginEntity) result).getErrmsg();
+
+                    if (!WechatConstants.GET_REQUEST_ACCESS_TOKEN_Errcode.equals(errcode)) {
+
+                        callback.Success(((ResponseWechatLoginEntity) result));
+
+                    } else {
+                        callback.Failed(((ResponseWechatLoginEntity) result).getErrmsg());
+                    }
+                }).Failed(msg -> callback.Failed((String) msg))
+                .get(mContext, mHandler);
+
+    }
+
+
+    /**
+     * @param callback 微信获取 用户信息 Openid Unionid Nickname Sex Headimgurl接口
+     */
+    public void loadWecahtUserInfoRequest(INetCallback<ResponseWechatUserInfoEntity> callback, String GET_REQUEST_USERINFO) {
+        new RequestHelper<ResponseWechatLoginEntity>().Method(RequestHelper.Method.GET)
+                .Url(GET_REQUEST_USERINFO)
+                .Success(result -> {
+
+                    String errcode = ((ResponseWechatUserInfoEntity) result).getErrcode();
+                    String errmsg = ((ResponseWechatUserInfoEntity) result).getErrmsg();
+
+                    if (!WechatConstants.GET_REQUEST_ACCESS_TOKEN_Errcode.equals(errcode)) {
+
+                        callback.Success(((ResponseWechatUserInfoEntity) result));
+
+                    } else {
+                        callback.Failed(((ResponseWechatUserInfoEntity) result).getErrmsg());
+                    }
+                }).Failed(msg -> callback.Failed((String) msg))
+                .get(mContext, mHandler);
+
     }
 
 

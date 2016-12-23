@@ -22,7 +22,7 @@ import cc.fish.coreui.view.xlistview.XListView;
  * news
  */
 
-public class NFragment extends BaseFragment {
+public class NFragment extends BaseFragment implements XListView.IXListViewListener {
 
     private static final int PIECES = 5;
     private HorizontalScrollView mScrollView;
@@ -45,6 +45,7 @@ public class NFragment extends BaseFragment {
         mScrollView = (HorizontalScrollView) v.findViewById(R.id.scroll);
         mLlBtnGrp = (LinearLayout) v.findViewById(R.id.ll_btns);
         mXl = (XListView) v.findViewById(R.id.xlv);
+        mXl.setXListViewListener(this);
         return v;
     }
 
@@ -144,5 +145,26 @@ public class NFragment extends BaseFragment {
     private int getItemWidth(int pieces) {
         int w = getActivity().getWindowManager().getDefaultDisplay().getWidth();
         return w / pieces;
+    }
+
+    @Override
+    public void onRefresh() {
+        page = 1;
+        App.getNetManager().loadNewsCategory(cCid, cCid2, page, new INetCallback<NewsDResp>() {
+            @Override
+            public void Success(NewsDResp newsDResp) {
+                freshList(newsDResp);
+                mXl.stopRefresh();
+            }
+            @Override
+            public void Failed(String msg) {
+                mXl.stopRefresh();
+            }
+        });
+    }
+
+    @Override
+    public void onLoadMore() {
+
     }
 }

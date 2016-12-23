@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 
 import com.youzi.fastnews.R;
+import com.youzi.fastnews.utils.PopWindowDisplayUtil;
 
 /**
  * Created by fish on 16-12-23.
@@ -17,14 +19,17 @@ import com.youzi.fastnews.R;
 public class ShareWebView extends Activity {
 
     private WebView mWb;
+    private Button mBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.a_shw);
         mWb = (WebView) findViewById(R.id.web);
+        mBtn = (Button) findViewById(R.id.btn_share);
         initWebView();
         mWb.loadUrl(getIntent().getStringExtra("URL"));
+        mBtn.setOnClickListener(v-> PopWindowDisplayUtil.showSharePopWindow(this, "content",mWb.getUrl(), "title", "shareContent", mBtn));
     }
 
     private void initWebView() {

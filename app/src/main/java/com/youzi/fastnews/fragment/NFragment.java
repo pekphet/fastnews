@@ -118,7 +118,7 @@ public class NFragment extends BaseFragment implements XListView.IXListViewListe
         App.getNetManager().loadNewsCategory(cCid, cCid2, page, new INetCallback<NewsDResp>() {
             @Override
             public void Success(NewsDResp newsDResp) {
-                freshList(newsDResp);
+                freshList(newsDResp, false);
             }
             @Override
             public void Failed(String msg) {
@@ -137,8 +137,12 @@ public class NFragment extends BaseFragment implements XListView.IXListViewListe
         }
     }
 
-    private void freshList(NewsDResp newsDResp) {
+    private void freshList(NewsDResp newsDResp, boolean append) {
+        if (append) {
+            
+        } else {
 
+        }
     }
 
 
@@ -153,7 +157,7 @@ public class NFragment extends BaseFragment implements XListView.IXListViewListe
         App.getNetManager().loadNewsCategory(cCid, cCid2, page, new INetCallback<NewsDResp>() {
             @Override
             public void Success(NewsDResp newsDResp) {
-                freshList(newsDResp);
+                freshList(newsDResp, false);
                 mXl.stopRefresh();
             }
             @Override
@@ -165,6 +169,17 @@ public class NFragment extends BaseFragment implements XListView.IXListViewListe
 
     @Override
     public void onLoadMore() {
-
+        page++;
+        App.getNetManager().loadNewsCategory(cCid, cCid2, page, new INetCallback<NewsDResp>() {
+            @Override
+            public void Success(NewsDResp newsDResp) {
+                freshList(newsDResp, true);
+                mXl.stopRefresh();
+            }
+            @Override
+            public void Failed(String msg) {
+                mXl.stopRefresh();
+            }
+        });
     }
 }

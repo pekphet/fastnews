@@ -56,7 +56,6 @@ public class NFragment extends BaseFragment {
                 mNList = newsListResp;
                 flushUI();
             }
-
             @Override
             public void Failed(String msg) {
 
@@ -75,7 +74,6 @@ public class NFragment extends BaseFragment {
 
             @Override
             public void Failed(String msg) {
-
             }
         });
     }

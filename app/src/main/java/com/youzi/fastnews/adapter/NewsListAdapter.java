@@ -7,10 +7,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youzi.fastnews.R;
+import com.youzi.fastnews.activity.ShareWebView;
 import com.youzi.fastnews.entity.NewsDE;
 
 import java.util.ArrayList;
@@ -53,7 +53,7 @@ public class NewsListAdapter extends BaseAdapter {
         ImageLoader.getInstance().displayImage(list.get(position).getImage(), img);
         tv.setText(list.get(position).getDescription());
         v.setOnClickListener(vv-> {
-            Toast.makeText(mContext, list.get(position).getLink(), Toast.LENGTH_SHORT).show();
+            ShareWebView.startWebActivity(mContext, list.get(position).getLink());
         });
         return v;
     }

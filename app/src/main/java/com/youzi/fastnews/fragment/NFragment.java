@@ -30,6 +30,7 @@ public class NFragment extends BaseFragment implements XListView.IXListViewListe
     private NewsListResp mNList = null;
     private boolean isScrolling = false;
     public LinearLayout.LayoutParams params = null;
+    public NewsListAdapter mAdapter = null;
 
     private int cCid = 0;
     private int cCid2 = 0;
@@ -70,7 +71,8 @@ public class NFragment extends BaseFragment implements XListView.IXListViewListe
         App.getNetManager().loadNewsCategory(new INetCallback<NewsDResp>() {
             @Override
             public void Success(NewsDResp newsDResp) {
-                mXl.setAdapter(new NewsListAdapter(getActivity(), newsDResp.getRows()));
+                mAdapter = new NewsListAdapter(getActivity(), newsDResp.getRows());
+                mXl.setAdapter(mAdapter);
             }
 
             @Override
@@ -113,6 +115,7 @@ public class NFragment extends BaseFragment implements XListView.IXListViewListe
         int itemWidth = item.getWidth();
         initList(index);
         ccl = index;
+        mXl.setAdapter(mAdapter);
         cCid = mNList.getRows().get(index).getParent_id();
         cCid2 = mNList.getRows().get(index).getId();
         App.getNetManager().loadNewsCategory(cCid, cCid2, page, new INetCallback<NewsDResp>() {
@@ -138,11 +141,7 @@ public class NFragment extends BaseFragment implements XListView.IXListViewListe
     }
 
     private void freshList(NewsDResp newsDResp, boolean append) {
-        if (append) {
-            
-        } else {
-
-        }
+        mAdapter.changeData(newsDResp.getRows(), append);
     }
 
 

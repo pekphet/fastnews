@@ -57,4 +57,12 @@ public class NewsListAdapter extends BaseAdapter {
         });
         return v;
     }
+
+    public void changeData(List<NewsDE> d, boolean isAppend) {
+        if(!isAppend) {
+            list.clear();
+            }
+        list.addAll(d);
+        notifyDataSetChanged();
+    }
 }

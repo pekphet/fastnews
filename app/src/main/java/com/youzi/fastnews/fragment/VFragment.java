@@ -22,7 +22,7 @@ import cc.fish.coreui.view.xlistview.XListView;
  * news
  */
 
-public class VFragment extends BaseFragment {
+public class VFragment extends BaseFragment implements XListView.IXListViewListener {
 
     private static final int PIECES = 5;
     private HorizontalScrollView mScrollView;
@@ -30,6 +30,7 @@ public class VFragment extends BaseFragment {
     private NewsListResp mNList = null;
     private boolean isScrolling = false;
     public LinearLayout.LayoutParams params = null;
+    public NewsListAdapter mAdapter = null;
 
     private int cCid = 0;
     private int cCid2 = 0;
@@ -45,6 +46,7 @@ public class VFragment extends BaseFragment {
         mScrollView = (HorizontalScrollView) v.findViewById(R.id.scroll);
         mLlBtnGrp = (LinearLayout) v.findViewById(R.id.ll_btns);
         mXl = (XListView) v.findViewById(R.id.xlv);
+        mXl.setXListViewListener(this);
         return v;
     }
 
@@ -69,7 +71,8 @@ public class VFragment extends BaseFragment {
         App.getNetManager().loadNewsCategory(new INetCallback<NewsDResp>() {
             @Override
             public void Success(NewsDResp newsDResp) {
-                mXl.setAdapter(new NewsListAdapter(getActivity(), newsDResp.getRows()));
+                mAdapter = new NewsListAdapter(getActivity(), newsDResp.getRows());
+                mXl.setAdapter(mAdapter);
             }
 
             @Override
@@ -112,12 +115,13 @@ public class VFragment extends BaseFragment {
         int itemWidth = item.getWidth();
         initList(index);
         ccl = index;
+        mXl.setAdapter(mAdapter);
         cCid = mNList.getRows().get(index).getParent_id();
         cCid2 = mNList.getRows().get(index).getId();
         App.getNetManager().loadNewsCategory(cCid, cCid2, page, new INetCallback<NewsDResp>() {
             @Override
             public void Success(NewsDResp newsDResp) {
-                freshList(newsDResp);
+                freshList(newsDResp, false);
             }
             @Override
             public void Failed(String msg) {
@@ -136,13 +140,45 @@ public class VFragment extends BaseFragment {
         }
     }
 
-    private void freshList(NewsDResp newsDResp) {
-
+    private void freshList(NewsDResp newsDResp, boolean append) {
+        mAdapter.changeData(newsDResp.getRows(), append);
     }
 
 
     private int getItemWidth(int pieces) {
         int w = getActivity().getWindowManager().getDefaultDisplay().getWidth();
         return w / pieces;
+    }
+
+    @Override
+    public void onRefresh() {
+        page = 1;
+        App.getNetManager().loadNewsCategory(cCid, cCid2, page, new INetCallback<NewsDResp>() {
+            @Override
+            public void Success(NewsDResp newsDResp) {
+                freshList(newsDResp, false);
+                mXl.stopRefresh();
+            }
+            @Override
+            public void Failed(String msg) {
+                mXl.stopRefresh();
+            }
+        });
+    }
+
+    @Override
+    public void onLoadMore() {
+        page++;
+        App.getNetManager().loadNewsCategory(cCid, cCid2, page, new INetCallback<NewsDResp>() {
+            @Override
+            public void Success(NewsDResp newsDResp) {
+                freshList(newsDResp, true);
+                mXl.stopRefresh();
+            }
+            @Override
+            public void Failed(String msg) {
+                mXl.stopRefresh();
+            }
+        });
     }
 }

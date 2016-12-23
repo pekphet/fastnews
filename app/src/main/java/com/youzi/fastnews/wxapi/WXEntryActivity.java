@@ -3,6 +3,7 @@ package com.youzi.fastnews.wxapi;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -14,6 +15,7 @@ import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.youzi.fastnews.App;
+import com.youzi.fastnews.entity.RegisterResponseEntity;
 import com.youzi.fastnews.entity.ResponseWechatLoginEntity;
 import com.youzi.fastnews.entity.ResponseWechatUserInfoEntity;
 import com.youzi.fastnews.global.WechatConstants;
@@ -26,6 +28,8 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 
     private IWXAPI api;
     private String code;
+    private String accessToken;
+    private String openID;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -166,8 +170,8 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
         public void Success(ResponseWechatLoginEntity entity) {
             if (entity != null) {
                 Log.e("ENTITY", entity.toString());
-                String accessToken = entity.getAccess_token();
-                String openID = entity.getOpenid();
+                accessToken = entity.getAccess_token();
+                openID = entity.getOpenid();
                 App.getNetManager().loadWecahtUserInfoRequest(mWechatUserinfoIAsyncFresher, getUserInfoRequest(accessToken, openID));
 
             }
@@ -186,7 +190,11 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
             if (entity != null) {
 //                Toast.makeText(WXEntryActivity.this, entity.toString(), Toast.LENGTH_SHORT).show();
 //                Log.e("WechatUserInfoEntity", "WechatUserInfoEntity:" + entity.toString());
-//                App.getNetManager().register(mRegistIAsyncFresher, entity.getOpenid(), entity.getUnionid(), entity.getNickname(), entity.getSex() + "", entity.getHeadimgurl(), AppUtil.getDeviceId(App.getWholeAppContext())+"","Android");
+                if (!TextUtils.isEmpty(accessToken)) {
+
+                    App.getNetManager().loginIn(mRegistIAsyncFresher, accessToken, entity.getOpenid(), entity.getUnionid(), entity.getNickname(), entity.getSex() + "", entity.getHeadimgurl(), "0");
+
+                }
 
             }
         }
@@ -198,17 +206,17 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
     };
 
 
-//    private INetCallback<RegisterResponseEntity> mRegistIAsyncFresher = new INetCallback<RegisterResponseEntity>() {
-//
-//        @Override
-//        public void Success(RegisterResponseEntity entity) {
-//            finish();
-//        }
-//
-//        @Override
-//        public void Failed(String errorMsg) {
-//            ZToast.r(WXEntryActivity.this, errorMsg);
-//        }
-//    };
+    private INetCallback<RegisterResponseEntity> mRegistIAsyncFresher = new INetCallback<RegisterResponseEntity>() {
+
+        @Override
+        public void Success(RegisterResponseEntity entity) {
+            finish();
+        }
+
+        @Override
+        public void Failed(String errorMsg) {
+            ZToast.r(WXEntryActivity.this, errorMsg);
+        }
+    };
 
 }

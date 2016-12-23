@@ -20,4 +20,17 @@ public class WechatConstants {
     public static final int WXSceneTimeline = 1;
 
 
+    /**
+     * 1.REGISTER API
+     **/
+    final public static String REQUEST_PARAM_REGISTER_ACCESS_TOKEN = "access_token";
+    final public static String REQUEST_PARAM_REGISTER_OPENID = "openid";
+    final public static String REQUEST_PARAM_REGISTER_UNIONID = "uniqueid";
+    final public static String REQUEST_PARAM_REGISTER_NICKNAME = "nickname";
+    final public static String REQUEST_PARAM_REGISTER_AVATAR = "avatar";
+    final public static String REQUEST_PARAM_REGISTER_SEX = "sex";
+    final public static String REQUEST_HEADIMAGE_URL = "headimgurl ";
+    final public static String REQUEST_PARENT_ID = "parent_id";
+
+
 }

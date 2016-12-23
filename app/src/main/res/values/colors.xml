@@ -9,4 +9,95 @@
     <color name="t_h_b_uc">#ffffff</color>
 
     <color name="b_h_b">#ffffff</color>
+
+    <color name="colorPrimaryDark">@android:color/transparent</color>
+    <color name="colorAccent">@android:color/transparent</color>
+
+    <!--界面背景颜色-->
+    <color name="layout_background_color">#F0F0F0</color>
+
+    <!--标题背景颜色-->
+    <color name="head_bg_color">#FAB703</color>
+
+    <!-- base color -->
+    <color name="home_title_bar_bg">#ff4433</color>
+    <color name="home_title_bar_text">#99ffffff</color>
+    <color name="home_bottom_checked">#ffff4433</color>
+    <color name="home_bottom_unchecked">#ffbbbbbb</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <!--1级标题颜色-->
+    <color name="first_text_color">#333333</color>
+    <!--2级标题颜色-->
+    <color name="second_text_color">#444444</color>
+    <!--3级标题颜色-->
+    <color name="third_text_color">#666666</color>
+    <!--4级标题颜色-->
+    <color name="fourth_text_color">#999999</color>
+
+    <color name="fifth_text_color">#CCCCCC</color>
+    <color name="sixth_text_color">#dfdfdf</color>
+    <color name="seventh_text_color">#6f6f6f</color>
+
+    <!--edittext边框默认颜色-->
+    <color name="edittext_default_color">#e4e4e4</color>
+    <!--Edittext控件之前的提示文字颜色-->
+    <color name="edittext_before_text_color">#aaaaaa</color>
+    <!--Edittext提示文字颜色-->
+    <color name="edittext_hint_text_color">#aaaaaa</color>
+    <!--Edittext输入文字颜色-->
+    <color name="edittext_input_text_color">#333333</color>
+    <!--分割线颜色-->
+    <color name="line_bg_color">#DDDDDD</color>
+    <!--按钮默认颜色-->
+    <color name="button_default_color">#FAB703</color>
+    <!--按钮点击颜色-->
+    <color name="button_click_color">#FA8203</color>
+
+    <!--按钮点击颜色-->
+    <color name="button_blue_color">#85CFFB</color>
+
+    <!--首页公用红色-->
+    <color name="home_page_red_color">#FE5900</color>
+
+    <!--抢红包界面字体颜色-->
+    <color name="redpacket_red_color">#DD3E37</color>
+
+    <!--首页Dialgo 字体颜色-->
+    <color name="dialog_black_text_size">#959595</color>
+
+    <!-- 任务详情列表字体颜色-->
+    <color name="task_details_text_default">#C2C2C2</color>
+
+    <!--首页Dialgo 字体颜色-->
+    <color name="home_page_redpacket_money_color">#FEEF35</color>
+
+    <color name="apply_red_color">#FF620b</color>
+
+    <color name="all_background_color">#3F3C51</color>
+
+    <color name="title_background">#302e3e</color>
+
+    <color name="title_line">#000000</color>
+
+    <color name="habit_details_line_color">#47445A</color>
+    <color name="habit_details_red_color">#f35b5b</color>
+    <color name="un_habit_details_red_color">#cc4d4d</color>
+    <color name="habit_details_yellow_color">#47445A</color>
+    <color name="pserson_line_color">#47435b</color>
+    <color name="login_text_color">#98979f</color>
+    <color name="pesrson_bg">#373648</color>
+    <color name="twenty_habit_bg">#2f2e3e</color>
+    <color name="title_bar_bg">#353246</color>
+    <color name="header_title_bg">#3F3C51</color>
+    <color name="header_bg">#2F2E3D</color>
+    <color name="pay_method_bg">#3F3C51</color>
+    <color name="invite_line_color">#38354A</color>
+    <color name="message_title_bg">#3F3C51</color>
+    <color name="invite_friends_bg">#3F3C51</color>
+    <color name="invite_friends_header_bg">#302D3E</color>
+
+
+
 </resources>

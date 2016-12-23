@@ -18,6 +18,7 @@ import ac.fish.utils.adcore.ADUtils;
 public class App extends Application {
 
     private static NetManager mNetManager;
+    private static String token;
 
     private static Context mAppContext;
 
@@ -43,6 +44,14 @@ public class App extends Application {
 
     public static NetManager getNetManager() {
         return mNetManager;
+    }
+
+    public static String getToken() {
+        return token;
+    }
+
+    public static void setToken(String Token) {
+        token = Token;
     }
 
     private void initIWXAPI() {

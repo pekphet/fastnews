@@ -4,7 +4,10 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.youzi.fastnews.App;
 import com.youzi.fastnews.Constants;
+import com.youzi.fastnews.entity.LoginE;
+import com.youzi.fastnews.entity.LoginRespD;
 import com.youzi.fastnews.entity.NewsDResp;
 import com.youzi.fastnews.entity.NewsDRespD;
 import com.youzi.fastnews.entity.NewsListResp;
@@ -54,7 +57,7 @@ public class NetManager implements Constants{
     public void loadNewsCategory(int parentId, int cId, int page, INetCallback<NewsDResp> callback) {
         new RequestHelper<NewsDRespD>().Method(RequestHelper.Method.GET)
                 .Url(NEWS_CATEGORY_URL)
-                .Result(NewsListRespD.class)
+                .Result(NewsDRespD.class)
                 .UrlParam("page", page+ "", true)
                 .UrlParam("category_id", parentId+ "")
                 .UrlParam("category_id2", cId+ "")
@@ -118,6 +121,26 @@ public class NetManager implements Constants{
 
     }
 
+    public void login(String accessToken, String openId, String parentId, String nickName, String headimgurl,INetCallback<LoginE> callback) {
+        new RequestHelper<LoginRespD>().Method(RequestHelper.Method.POST)
+                .Url(LOGIN_URL)
+                .Result(LoginRespD.class)
+                .PostParam("access_token",  accessToken, true)
+                .PostParam("openid",        openId)
+                .PostParam("uniqueid",      "IMEI")
+                .PostParam("nickname",      nickName)
+                .PostParam("headimgurl",    headimgurl)
+                .PostParam("parent_id",     parentId)
+                .Success(result -> {
+                    if (((LoginRespD)result).getCode() != 0) {
+                        callback.Failed(((LoginRespD)result).getMsg());
+                    }
+                    callback.Success(((LoginRespD)result).getData());
+                    App.setToken(((LoginRespD)result).getData().getCode());
+                })
+                .Failed(MSG -> callback.Failed((String) MSG))
+                .post(mContext, mHandler);
 
+    }
 
 }

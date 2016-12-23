@@ -204,31 +204,3 @@ public class NewsDE {
         this.category_name = category_name;
     }
 }
-
-
-/**
- {
- "id": "1",
- "category_id": "1",
- "category_id2": "3",
- "category_id3": "0",
- "article_name": "彩虹旗在英超飘扬却引争议，足球为少数群体发声，究竟是不是一种“政治行为”？",
- "keywords": "足球,LGBT",
- "description": "难道在美国为同性恋婚姻立宪合法化的今天，“反同”在西方世界仍然是一种“政治正确”吗？",
- "image_layout": "1",
- "image": "https://imgs.bipush.com/article/cover/201610/28/095422154977.jpg?imageView2/1/w/396/h/297/|imageMogr2/strip/interlace/1/quality/85/format/jpg",
- "like_count": "2",
- "dislike_count": "0",
- "collect_count": "0",
- "status": "显示",
- "order_num": "9999",
- "comment_count": "0",
- "publish_time": "2016-11-29 18:19:00",
- "create_time": "2016-12-15 18:18:30",
- "ticheng_point": "0",
- "point": "10",
- "link": "http://cpu.baidu.com/1025/d907f92c/detail/323897/image?pvid=79B77E5E-E5F1-4E32-A9FF-54E9E7BFA835", //转发的链接，需webview打开
- "recommend": "0",
- "category_name": "新闻"
- }
- */

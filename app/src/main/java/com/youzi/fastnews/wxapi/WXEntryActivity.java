@@ -15,6 +15,7 @@ import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.youzi.fastnews.App;
+import com.youzi.fastnews.activity.ImmediatelyLoginActivity;
 import com.youzi.fastnews.entity.RegisterResponseEntity;
 import com.youzi.fastnews.entity.ResponseWechatLoginEntity;
 import com.youzi.fastnews.entity.ResponseWechatUserInfoEntity;
@@ -213,6 +214,8 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
         @Override
         public void Success(RegisterResponseEntity entity) {
             finish();
+            ZLog.e ("callback", "login success");
+            ImmediatelyLoginActivity.loginSucc();
         }
 
         @Override

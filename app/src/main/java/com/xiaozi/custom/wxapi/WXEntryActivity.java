@@ -15,6 +15,7 @@ import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.youzi.fastnews.App;
+import com.youzi.fastnews.activity.ImmediatelyLoginActivity;
 import com.youzi.fastnews.entity.RegisterResponseEntity;
 import com.youzi.fastnews.entity.ResponseWechatLoginEntity;
 import com.youzi.fastnews.entity.ResponseWechatUserInfoEntity;
@@ -108,6 +109,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
                 break;
             case ConstantsAPI.COMMAND_SENDMESSAGE_TO_WX://分享回调
                 if (resp.errCode == BaseResp.ErrCode.ERR_OK) {
+                    App.getNetManager().clkZF(App.sCFID);
                     ZToast.r(WXEntryActivity.this, "恭喜您，分享成功");
                     finish();
                 } else if (resp.errCode == BaseResp.ErrCode.ERR_USER_CANCEL) {//用户取消
@@ -192,6 +194,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 //                Log.e("WechatUserInfoEntity", "WechatUserInfoEntity:" + entity.toString());
                 if (!TextUtils.isEmpty(accessToken)) {
 
+
                     App.getNetManager().loginIn(mRegistIAsyncFresher, accessToken, entity.getOpenid(), entity.getUnionid(), entity.getNickname(), entity.getSex() + "", entity.getHeadimgurl(), "0");
 
                 }
@@ -211,6 +214,8 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
         @Override
         public void Success(RegisterResponseEntity entity) {
             finish();
+            ZLog.e ("callback", "login success");
+            ImmediatelyLoginActivity.loginSucc();
         }
 
         @Override

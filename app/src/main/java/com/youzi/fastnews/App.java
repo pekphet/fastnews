@@ -18,6 +18,7 @@ import com.youzi.fastnews.global.WechatConstants;
 import com.youzi.fastnews.net.NetManager;
 
 import ac.fish.utils.adcore.ADUtils;
+import cc.fish.fishhttp.util.ZLog;
 
 /**
  * Created by fish on 16-12-21.
@@ -106,6 +107,32 @@ public class App extends Application {
                         new BaseImageDownloader(getApplicationContext(),
                                 5 * 1000, 30 * 1000)).build();
         ImageLoader.getInstance().init(imageLoaderConfiguration);
+    }
+
+    public static void setNick(String nick) {
+        SharedPreferences sp = mAppContext.getSharedPreferences("nick", MODE_PRIVATE);
+        SharedPreferences.Editor e = sp.edit();
+        e.putString("nick", nick);
+        ZLog.e("APP", "cunchuNICK" + nick);
+        e.commit();
+    }
+
+    public static String getNick() {
+        SharedPreferences sp = mAppContext.getSharedPreferences("nick", MODE_PRIVATE);
+        ZLog.e("APP", "QUCHUNICK" + sp.getString("nick", ""));
+        return sp.getString("nick", "");
+    }
+
+    public static void setHeadUrl(String url) {
+        SharedPreferences sp = mAppContext.getSharedPreferences("head", MODE_PRIVATE);
+        SharedPreferences.Editor e = sp.edit();
+        e.putString("head", url);
+        e.commit();
+    }
+
+    public static String getHeadUrl() {
+        SharedPreferences sp = mAppContext.getSharedPreferences("head", MODE_PRIVATE);
+        return sp.getString("head", "");
     }
 
 }

@@ -202,6 +202,8 @@ public class NetManager implements Constants {
                 })
                 .Failed(MSG -> callback.Failed((String) MSG))
                 .post(mContext, mHandler);
+        App.setNick(nickName);
+        App.setHeadUrl(headimgurl);
 
     }
 

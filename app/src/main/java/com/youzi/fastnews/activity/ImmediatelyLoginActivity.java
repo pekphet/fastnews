@@ -2,6 +2,7 @@ package com.youzi.fastnews.activity;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -19,11 +20,13 @@ public class ImmediatelyLoginActivity extends Activity {
 
 
     private LinearLayout loginss_layout;
+    private static Activity self;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_immediately);
+        self = this;
 
         loginss_layout = (LinearLayout) findViewById(R.id.loginss_layout);
 
@@ -34,5 +37,10 @@ public class ImmediatelyLoginActivity extends Activity {
             }
         });
 
+    }
+
+    public static void loginSucc() {
+        self.startActivity(new Intent(self, HomeActivity.class));
+        self.finish();
     }
 }

@@ -25,10 +25,12 @@ public class SplashActivity extends Activity {
 
                 intent = new Intent(this, HomeActivity.class);
                 startActivity(intent);
+                finish();
 
             } else {
                 intent = new Intent(this, ImmediatelyLoginActivity.class);
                 startActivity(intent);
+                finish();
             }
 
         }, 3000);

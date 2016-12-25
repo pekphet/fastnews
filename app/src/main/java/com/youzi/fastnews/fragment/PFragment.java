@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youzi.fastnews.App;
 import com.youzi.fastnews.R;
 import com.youzi.fastnews.activity.ApplyWithdrawalsActivity;
@@ -32,17 +34,19 @@ public class PFragment extends BaseFragment {
     private Button btn_get_money;
     private TextView apply_during_tv;
     private TextView per_login_tv;
+    private ImageView mImgH;
 
     @Override
     protected View initView(LayoutInflater inflater) {
-        View v = inflater.inflate(R.layout.f_p, null);
-        mLlInvite = (LinearLayout) v.findViewById(R.id.ll_invite);
-        mLlInviteR = (LinearLayout) v.findViewById(R.id.ll_invite_r);
-        mLlShare = (LinearLayout) v.findViewById(R.id.ll_sh);
-        mLlShareR = (LinearLayout) v.findViewById(R.id.ll_sh_r);
+        View v      = inflater.inflate(R.layout.f_p, null);
+        mLlInvite   = (LinearLayout) v.findViewById(R.id.ll_invite);
+        mLlInviteR  = (LinearLayout) v.findViewById(R.id.ll_invite_r);
+        mLlShare    = (LinearLayout) v.findViewById(R.id.ll_sh);
+        mLlShareR   = (LinearLayout) v.findViewById(R.id.ll_sh_r);
         btn_get_money = (Button) v.findViewById(R.id.btn_get_money);
         apply_during_tv = (TextView) v.findViewById(R.id.apply_during_tv);
         per_login_tv = (TextView) v.findViewById(R.id.per_login_tv);
+        mImgH = (ImageView) v.findViewById(R.id.img_head);
 
 
         mLlInvite.setOnClickListener(this);
@@ -51,10 +55,11 @@ public class PFragment extends BaseFragment {
         mLlShareR.setOnClickListener(this);
         btn_get_money.setOnClickListener(this);
         apply_during_tv.setOnClickListener(this);
-        per_login_tv.setOnClickListener(this);
+        //per_login_tv.setOnClickListener(this);
+        ImageLoader.getInstance().displayImage(App.getHeadUrl(), mImgH);
+        per_login_tv.setText(App.getNick());
 
         return v;
-
     }
 
     @Override

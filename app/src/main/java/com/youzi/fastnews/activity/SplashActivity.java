@@ -1,5 +1,6 @@
 package com.youzi.fastnews.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -7,10 +8,9 @@ import android.os.Looper;
 import android.text.TextUtils;
 
 import com.youzi.fastnews.App;
+import com.youzi.fastnews.R;
 
-import cc.fish.coreui.BaseSplashActivity;
-
-public class SplashActivity extends BaseSplashActivity {
+public class SplashActivity extends Activity {
 
     private Handler myHandler = new Handler(Looper.getMainLooper());
     private Intent intent;
@@ -18,7 +18,7 @@ public class SplashActivity extends BaseSplashActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.a_s);
         myHandler.postDelayed(() -> {
 
             if (!TextUtils.isEmpty(App.getToken())) {

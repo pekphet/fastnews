@@ -11,10 +11,13 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.youzi.fastnews.App;
 import com.youzi.fastnews.R;
 import com.youzi.fastnews.adapter.InviteAdapter;
+import com.youzi.fastnews.global.WechatConstants;
 import com.youzi.fastnews.utils.ImageTools;
 import com.youzi.fastnews.utils.TextUtil;
+import com.youzi.fastnews.utils.WechatUtils;
 import com.youzi.fastnews.view.BasePopwindow;
 import com.youzi.fastnews.view.MyListView;
 
@@ -55,6 +58,9 @@ public class InviteFriendsActivity extends Activity implements View.OnClickListe
     private String masterID;
     private boolean isPaused;
     private ImageView in;
+    private String shareUrl;
+    private String shareTitle;
+    private String shareContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,19 +163,7 @@ public class InviteFriendsActivity extends Activity implements View.OnClickListe
                     return;
                 }
 
-//                PopWindowDisplayUtil.showSharePopWindow(InviteFriendsActivity.this, new KouLingShareListener
-//                                (InviteFriendsActivity.this, "android_1", new KouLingShareListener.ShareCompleteListener() {
-//                                    @Override
-//                                    public void shareComplete() {
-//
-//                                        App.getNetDataManager().rouleteAdd(mRouleteAddAsyncFresher);
-//
-//                                    }
-//                                }), new ShareButtonClickListener(InviteFriendsActivity.this, "android_2"),
-//                        "快速分享", inviteFriendsUrl.getText().toString(), "安全靠谱的手机赚钱APP！", "下载一个应用赚1元，半小时轻松20元！微信提现秒到账！现在注册还有红包拿！", v, 1);
-
-                
-
+                WechatUtils.wechatShare(InviteFriendsActivity.this, App.iWXAPI, WechatConstants.WXSceneTimeline, shareUrl, shareTitle, shareContent);
 
                 break;
 

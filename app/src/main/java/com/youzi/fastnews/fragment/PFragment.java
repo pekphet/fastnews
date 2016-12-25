@@ -3,10 +3,14 @@ package com.youzi.fastnews.fragment;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.youzi.fastnews.R;
-import com.youzi.fastnews.activity.InviteActivity;
+import com.youzi.fastnews.activity.ApplyWithdrawalsActivity;
+import com.youzi.fastnews.activity.ApplyWithdrawalsDetailsActivity;
+import com.youzi.fastnews.activity.InviteFriendsActivity;
 import com.youzi.fastnews.activity.InviteRankActivity;
 import com.youzi.fastnews.activity.ShareActivity;
 import com.youzi.fastnews.activity.ShareRankActivity;
@@ -23,6 +27,8 @@ public class PFragment extends BaseFragment {
     private LinearLayout mLlInviteR;
     private LinearLayout mLlShare;
     private LinearLayout mLlShareR;
+    private Button btn_get_money;
+    private TextView apply_during_tv;
 
     @Override
     protected View initView(LayoutInflater inflater) {
@@ -31,10 +37,14 @@ public class PFragment extends BaseFragment {
         mLlInviteR = (LinearLayout) v.findViewById(R.id.ll_invite_r);
         mLlShare = (LinearLayout) v.findViewById(R.id.ll_sh);
         mLlShareR = (LinearLayout) v.findViewById(R.id.ll_sh_r);
+        btn_get_money = (Button) v.findViewById(R.id.btn_get_money);
+        apply_during_tv = (TextView) v.findViewById(R.id.apply_during_tv);
         mLlInvite.setOnClickListener(this);
         mLlInviteR.setOnClickListener(this);
         mLlShare.setOnClickListener(this);
         mLlShareR.setOnClickListener(this);
+        btn_get_money.setOnClickListener(this);
+        apply_during_tv.setOnClickListener(this);
         return v;
 
     }
@@ -48,7 +58,7 @@ public class PFragment extends BaseFragment {
     protected void click(View v) {
         switch (v.getId()) {
             case R.id.ll_invite:
-                startActivity(new Intent(getActivity(), InviteActivity.class));
+                startActivity(new Intent(getActivity(), InviteFriendsActivity.class));
                 break;
             case R.id.ll_invite_r:
                 startActivity(new Intent(getActivity(), InviteRankActivity.class));
@@ -58,6 +68,12 @@ public class PFragment extends BaseFragment {
                 break;
             case R.id.ll_sh_r:
                 startActivity(new Intent(getActivity(), ShareRankActivity.class));
+                break;
+            case R.id.btn_get_money:
+                startActivity(new Intent(getActivity(), ApplyWithdrawalsActivity.class));
+                break;
+            case R.id.apply_during_tv:
+                startActivity(new Intent(getActivity(), ApplyWithdrawalsDetailsActivity.class));
                 break;
             default:
                 break;

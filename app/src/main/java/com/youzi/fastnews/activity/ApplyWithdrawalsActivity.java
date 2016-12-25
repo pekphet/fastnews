@@ -12,6 +12,8 @@ import com.youzi.fastnews.R;
 
 /**
  * Created by ywb on 2016/12/23.
+ *
+ * 提现界面
  */
 
 public class ApplyWithdrawalsActivity extends Activity {

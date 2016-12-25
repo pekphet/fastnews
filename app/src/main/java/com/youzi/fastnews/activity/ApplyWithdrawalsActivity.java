@@ -64,7 +64,7 @@ public class ApplyWithdrawalsActivity extends Activity {
         App.getNetManager().getYuE(new INetCallback<YUEResp>() {
             @Override
             public void Success(YUEResp yueResp) {
-                yu_e.setText(String.format("余额：％s元", yueResp.getMoney()));
+                yu_e.setText(String.format("余额：%.2f元", yueResp.getMoney()));
             }
 
             @Override

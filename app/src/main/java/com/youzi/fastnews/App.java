@@ -34,7 +34,7 @@ public class App extends Application {
     public static IWXAPI iWXAPI;
     public static String sCFID;
 
-    public static String sYUE = "";
+    public static float sYUE = 0.0f;
 
     @Override
     public void onCreate() {

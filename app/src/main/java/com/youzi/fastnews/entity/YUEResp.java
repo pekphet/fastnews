@@ -5,13 +5,13 @@ package com.youzi.fastnews.entity;
  */
 
 public class YUEResp {
-    private String money;
+    private float money;
 
-    public String getMoney() {
+    public float getMoney() {
         return money;
     }
 
-    public void setMoney(String money) {
+    public void setMoney(float money) {
         this.money = money;
     }
 }

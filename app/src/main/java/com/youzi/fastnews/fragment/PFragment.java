@@ -64,9 +64,9 @@ public class PFragment extends BaseFragment {
         ImageLoader.getInstance().displayImage(App.getHeadUrl(), mImgH);
         per_login_tv.setText(App.getNick());
         if (txShh != 0.0f) {
-            per_login_tv.setText(String.format("您有一笔%f元提现正在处理中", txShh));
+            apply_during_tv.setText(String.format("您有一笔%.2f元提现正在处理中", txShh));
         } else {
-            per_login_tv.setVisibility(View.GONE);
+            apply_during_tv.setVisibility(View.GONE);
         }
 
         return v;
@@ -77,9 +77,11 @@ public class PFragment extends BaseFragment {
         App.getNetManager().txList(new INetCallback<TXListResp>() {
             @Override
             public void Success(TXListResp txListResp) {
-                if (txListResp != null && txListResp.getWithdrawal_list()!= null) {
+                if (txListResp != null && txListResp.getWithdrawal_list()!= null && txListResp.getWithdrawal_list().size() > 0) {
                     if (txListResp.getWithdrawal_list().get(0).getStatus().equals("待审核")) {
                         txShh = txListResp.getWithdrawal_list().get(0).getPoint();
+                    } else {
+
                     }
                 }
             }

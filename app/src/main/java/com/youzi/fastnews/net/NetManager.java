@@ -222,6 +222,7 @@ public class NetManager implements Constants {
         new RequestHelper<TXListResponseD>().Url(MAIN_URL + "/api/userinfo/withdrawal_list")
                 .Method(RequestHelper.Method.GET)
                 .Result(TXListResponseD.class)
+                .UrlParam("logged_token", App.getToken(), true)
                 .Success(result -> {
                     if (((TXListResponseD) result).getCode() != 0) {
                         callback.Failed(((TXListResponseD) result).getMsg());
@@ -235,5 +236,24 @@ public class NetManager implements Constants {
                 .Failed(msg-> ZToast.d(mContext, (String) msg))
                 .get(mContext, mHandler);
     }
+
+
+    //http://60.205.58.24:8084/api/userinfo/apply_withdrawal?money=10&logged_token=63180812cfbb04a3de5aab352ceab3c4
+    public void tx(INetCallback<String> callback, int money) {
+        new RequestHelper<SResp>().Url(MAIN_URL + "/api/userinfo/apply_withdrawal")
+                .Method(RequestHelper.Method.GET)
+                .Result(SResp.class)
+                .UrlParam("money", money + "", true)
+                .UrlParam("logged_token", App.getToken())
+                .Success(result -> {
+                    if (((SResp)result).getCode() != 0) {
+                        callback.Failed(((SResp)result).getMsg());
+                    } else {
+                        callback.Success(((SResp)result).getMsg());
+                    }
+                }).Failed(msg -> callback.Failed((String) msg))
+                .get(mContext, mHandler);
+    }
+
 
 }

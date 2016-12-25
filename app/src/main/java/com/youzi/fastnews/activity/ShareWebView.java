@@ -51,7 +51,8 @@ public class ShareWebView extends Activity {
     }
 
     private void sent2FR() {
-        WechatUtils.wechatShare(this, App.iWXAPI, WechatConstants.WXSceneTimeline, sUrl, sCon, sDes);
+        PopWindowDisplayUtil.showSharePopWindow(this, "分享", sUrl, sCon, sDes, mBtnFr);
+        //WechatUtils.wechatShare(this, App.iWXAPI, WechatConstants.WXSceneTimeline, sUrl, sCon, sDes);
 
     }
 

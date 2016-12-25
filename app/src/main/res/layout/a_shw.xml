@@ -10,16 +10,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="火速新闻"/>
+            android:text="火速新闻－转发"/>
 
         <Button
-            android:id="@+id/btn_share"
+        android:id="@+id/btn_share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp"
+        android:text="转发规则"/>
+
+        <Button
+            android:id="@+id/btn_retn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
-            android:text="分享"/>
+            android:text="返回"/>
 
     </RelativeLayout>
 
@@ -27,5 +36,11 @@
         android:id="@+id/web"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:text="转发到朋友圈"/>
 
 </LinearLayout>

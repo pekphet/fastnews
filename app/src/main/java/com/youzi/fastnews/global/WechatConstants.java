@@ -25,7 +25,7 @@ public class WechatConstants {
      **/
     final public static String REQUEST_PARAM_REGISTER_ACCESS_TOKEN = "access_token";
     final public static String REQUEST_PARAM_REGISTER_OPENID = "openid";
-    final public static String REQUEST_PARAM_REGISTER_UNIONID = "unionId";
+    final public static String REQUEST_PARAM_REGISTER_UNIONID = "unionid";
     final public static String REQUEST_PARAM_REGISTER_UNIQUID = "uniqueid";
     final public static String REQUEST_PARAM_REGISTER_NICKNAME = "nickname";
     final public static String REQUEST_PARAM_REGISTER_AVATAR = "avatar";

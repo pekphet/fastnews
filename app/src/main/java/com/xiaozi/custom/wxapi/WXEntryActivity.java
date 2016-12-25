@@ -1,4 +1,4 @@
-package com.youzi.fastnews.wxapi;
+package com.xiaozi.custom.wxapi;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -191,7 +191,6 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 //                Toast.makeText(WXEntryActivity.this, entity.toString(), Toast.LENGTH_SHORT).show();
 //                Log.e("WechatUserInfoEntity", "WechatUserInfoEntity:" + entity.toString());
                 if (!TextUtils.isEmpty(accessToken)) {
-
 
                     App.getNetManager().loginIn(mRegistIAsyncFresher, accessToken, entity.getOpenid(), entity.getUnionid(), entity.getNickname(), entity.getSex() + "", entity.getHeadimgurl(), "0");
 

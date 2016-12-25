@@ -5,6 +5,13 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.Toast;
 
+import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemoryCache;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.youzi.fastnews.global.WechatConstants;
@@ -30,8 +37,10 @@ public class App extends Application {
         super.onCreate();
         initAppContext();
         initComponents();
+
         /**初始化*/
         initIWXAPI();
+        initImageLoader();
     }
 
     private void initAppContext() {
@@ -77,4 +86,25 @@ public class App extends Application {
 
 
     }
+
+    private void initImageLoader() {
+        ImageLoaderConfiguration imageLoaderConfiguration = new ImageLoaderConfiguration.Builder(
+                getApplicationContext())
+                .memoryCacheExtraOptions(480, 800)
+                .threadPoolSize(3)
+                .threadPriority(Thread.NORM_PRIORITY - 2)
+                .denyCacheImageMultipleSizesInMemory()
+                .memoryCache(new UsingFreqLimitedMemoryCache(4 * 1024 * 1024))
+                .memoryCacheSize(4 * 1024 * 1024)
+                .discCacheSize(50 * 1024 * 1024)
+                .discCacheFileNameGenerator(new Md5FileNameGenerator())
+                .tasksProcessingOrder(QueueProcessingType.LIFO)
+                .discCacheFileCount(100)
+                .defaultDisplayImageOptions(DisplayImageOptions.createSimple())
+                .imageDownloader(
+                        new BaseImageDownloader(getApplicationContext(),
+                                5 * 1000, 30 * 1000)).build();
+        ImageLoader.getInstance().init(imageLoaderConfiguration);
+    }
+
 }

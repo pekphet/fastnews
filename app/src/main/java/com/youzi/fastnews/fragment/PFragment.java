@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.youzi.fastnews.App;
 import com.youzi.fastnews.R;
 import com.youzi.fastnews.activity.ApplyWithdrawalsActivity;
 import com.youzi.fastnews.activity.ApplyWithdrawalsDetailsActivity;
@@ -14,6 +15,7 @@ import com.youzi.fastnews.activity.InviteFriendsActivity;
 import com.youzi.fastnews.activity.InviteRankActivity;
 import com.youzi.fastnews.activity.ShareActivity;
 import com.youzi.fastnews.activity.ShareRankActivity;
+import com.youzi.fastnews.utils.WechatUtils;
 
 import cc.fish.coreui.BaseFragment;
 
@@ -29,6 +31,7 @@ public class PFragment extends BaseFragment {
     private LinearLayout mLlShareR;
     private Button btn_get_money;
     private TextView apply_during_tv;
+    private TextView per_login_tv;
 
     @Override
     protected View initView(LayoutInflater inflater) {
@@ -39,12 +42,17 @@ public class PFragment extends BaseFragment {
         mLlShareR = (LinearLayout) v.findViewById(R.id.ll_sh_r);
         btn_get_money = (Button) v.findViewById(R.id.btn_get_money);
         apply_during_tv = (TextView) v.findViewById(R.id.apply_during_tv);
+        per_login_tv = (TextView) v.findViewById(R.id.per_login_tv);
+
+
         mLlInvite.setOnClickListener(this);
         mLlInviteR.setOnClickListener(this);
         mLlShare.setOnClickListener(this);
         mLlShareR.setOnClickListener(this);
         btn_get_money.setOnClickListener(this);
         apply_during_tv.setOnClickListener(this);
+        per_login_tv.setOnClickListener(this);
+
         return v;
 
     }
@@ -74,6 +82,9 @@ public class PFragment extends BaseFragment {
                 break;
             case R.id.apply_during_tv:
                 startActivity(new Intent(getActivity(), ApplyWithdrawalsDetailsActivity.class));
+                break;
+            case R.id.per_login_tv:
+                WechatUtils.wechatLogin(App.iWXAPI);
                 break;
             default:
                 break;

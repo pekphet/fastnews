@@ -21,6 +21,7 @@ import com.youzi.fastnews.utils.DeviceUtils;
 import cc.fish.fishhttp.net.RequestHelper;
 
 import static com.youzi.fastnews.global.WechatConstants.REQUEST_HEADIMAGE_URL;
+import static com.youzi.fastnews.global.WechatConstants.REQUEST_PARAM_REGISTER_ACCESS_TOKEN;
 import static com.youzi.fastnews.global.WechatConstants.REQUEST_PARAM_REGISTER_NICKNAME;
 import static com.youzi.fastnews.global.WechatConstants.REQUEST_PARAM_REGISTER_OPENID;
 import static com.youzi.fastnews.global.WechatConstants.REQUEST_PARAM_REGISTER_SEX;
@@ -94,6 +95,7 @@ public class NetManager implements Constants {
     public void loadWecahtAccessTokenRequest(INetCallback<ResponseWechatLoginEntity> callback, String GET_REQUEST_ACCESS_TOKEN) {
         new RequestHelper<ResponseWechatLoginEntity>().Method(RequestHelper.Method.GET)
                 .Url(GET_REQUEST_ACCESS_TOKEN)
+                .Result(ResponseWechatLoginEntity.class)
                 .Success(result -> {
 
                     String errcode = ((ResponseWechatLoginEntity) result).getErrcode();
@@ -116,8 +118,9 @@ public class NetManager implements Constants {
      * @param callback 微信获取 用户信息 Openid Unionid Nickname Sex Headimgurl接口
      */
     public void loadWecahtUserInfoRequest(INetCallback<ResponseWechatUserInfoEntity> callback, String GET_REQUEST_USERINFO) {
-        new RequestHelper<ResponseWechatLoginEntity>().Method(RequestHelper.Method.GET)
+        new RequestHelper<ResponseWechatUserInfoEntity>().Method(RequestHelper.Method.GET)
                 .Url(GET_REQUEST_USERINFO)
+                .Result(ResponseWechatUserInfoEntity.class)
                 .Success(result -> {
 
                     String errcode = ((ResponseWechatUserInfoEntity) result).getErrcode();
@@ -136,8 +139,9 @@ public class NetManager implements Constants {
 
     public void loginIn(INetCallback<RegisterResponseEntity> callback, String accessToken, String openId, String unionId, String nickname, String sex, String headimgurl, String parentID) {
         new RequestHelper<ResponseWechatLoginEntity>().Method(RequestHelper.Method.POST)
-                .Url("http: //60.205.58.24: 8084/api/user/wechat_login")
-                .PostParam(REQUEST_PARAM_REGISTER_OPENID, accessToken)
+                .Url("http://60.205.58.24:8084/api/user/wechat_login")
+                .Result(RegisterResponseEntity.class)
+                .PostParam(REQUEST_PARAM_REGISTER_ACCESS_TOKEN, accessToken)
                 .PostParam(REQUEST_PARAM_REGISTER_OPENID, openId)
                 .PostParam(REQUEST_PARAM_REGISTER_UNIONID, unionId)
                 .PostParam(REQUEST_PARAM_REGISTER_UNIQUID, DeviceUtils.getIMEI(mContext))

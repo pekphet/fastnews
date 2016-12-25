@@ -17,6 +17,9 @@ import com.youzi.fastnews.activity.InviteFriendsActivity;
 import com.youzi.fastnews.activity.InviteRankActivity;
 import com.youzi.fastnews.activity.ShareActivity;
 import com.youzi.fastnews.activity.ShareRankActivity;
+import com.youzi.fastnews.entity.TXListResp;
+import com.youzi.fastnews.entity.YUEResp;
+import com.youzi.fastnews.net.INetCallback;
 import com.youzi.fastnews.utils.WechatUtils;
 
 import cc.fish.coreui.BaseFragment;
@@ -35,6 +38,8 @@ public class PFragment extends BaseFragment {
     private TextView apply_during_tv;
     private TextView per_login_tv;
     private ImageView mImgH;
+
+    private float txShh = 0.0f;
 
     @Override
     protected View initView(LayoutInflater inflater) {
@@ -58,13 +63,32 @@ public class PFragment extends BaseFragment {
         //per_login_tv.setOnClickListener(this);
         ImageLoader.getInstance().displayImage(App.getHeadUrl(), mImgH);
         per_login_tv.setText(App.getNick());
+        if (txShh != 0.0f) {
+            per_login_tv.setText(String.format("您有一笔%f元提现正在处理中", txShh));
+        } else {
+            per_login_tv.setVisibility(View.GONE);
+        }
 
         return v;
     }
 
     @Override
     protected void initData() {
+        App.getNetManager().txList(new INetCallback<TXListResp>() {
+            @Override
+            public void Success(TXListResp txListResp) {
+                if (txListResp != null && txListResp.getWithdrawal_list()!= null) {
+                    if (txListResp.getWithdrawal_list().get(0).getStatus().equals("待审核")) {
+                        txShh = txListResp.getWithdrawal_list().get(0).getPoint();
+                    }
+                }
+            }
 
+            @Override
+            public void Failed(String msg) {
+
+            }
+        });
     }
 
     @Override

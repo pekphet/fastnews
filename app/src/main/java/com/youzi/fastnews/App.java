@@ -34,6 +34,8 @@ public class App extends Application {
     public static IWXAPI iWXAPI;
     public static String sCFID;
 
+    public static String sYUE = "";
+
     @Override
     public void onCreate() {
         super.onCreate();

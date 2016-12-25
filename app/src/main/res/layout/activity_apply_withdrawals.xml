@@ -34,10 +34,13 @@
     <EditText
         android:id="@+id/money"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="50dp"
         android:hint="请输入提现金额"
         android:textColor="@color/third_text_color"
         android:textColorHighlight="@color/third_text_color"
+        android:inputType="numberDecimal"
+        android:gravity="center_vertical"
+        android:layout_margin="20dp"
         android:textSize="@dimen/third_text_size" />
 
     <LinearLayout
@@ -49,7 +52,9 @@
             android:id="@+id/yu_e"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="o 余额 : 100元"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="余额 : 100元"
             android:textColor="@color/third_text_color"
             android:textSize="@dimen/sixth_text_size" />
 

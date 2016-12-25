@@ -19,6 +19,8 @@ import com.youzi.fastnews.entity.SResp;
 import com.youzi.fastnews.entity.TXListE;
 import com.youzi.fastnews.entity.TXListResp;
 import com.youzi.fastnews.entity.TXListResponseD;
+import com.youzi.fastnews.entity.YUEResp;
+import com.youzi.fastnews.entity.YUERespD;
 import com.youzi.fastnews.global.WechatConstants;
 import com.youzi.fastnews.utils.DeviceUtils;
 import com.youzi.fastnews.utils.ZToast;
@@ -164,6 +166,9 @@ public class NetManager implements Constants {
                         callback.Failed(((RegisterResponseEntity) result).getMsg());
                     }
                 }).Failed(msg -> callback.Failed((String) msg)).post(mContext, mHandler);
+
+        App.setNick(nickname);
+        App.setHeadUrl(headimgurl);
     }
 
     public void loadNewsCategory(INetCallback<NewsDResp> callback) {
@@ -241,11 +246,11 @@ public class NetManager implements Constants {
 
 
     //http://60.205.58.24:8084/api/userinfo/apply_withdrawal?money=10&logged_token=63180812cfbb04a3de5aab352ceab3c4
-    public void tx(INetCallback<String> callback, int money) {
+    public void tx(INetCallback<String> callback, String money) {
         new RequestHelper<SResp>().Url(MAIN_URL + "/api/userinfo/apply_withdrawal")
                 .Method(RequestHelper.Method.GET)
                 .Result(SResp.class)
-                .UrlParam("money", money + "", true)
+                .UrlParam("money", money, true)
                 .UrlParam("logged_token", App.getToken())
                 .Success(result -> {
                     if (((SResp)result).getCode() != 0) {
@@ -257,5 +262,21 @@ public class NetManager implements Constants {
                 .get(mContext, mHandler);
     }
 
+    //http://60.205.58.24:8084/api/userinfo/get_money?logged_token=63180812cfbb04a3de5aab352ceab3c4
+    public void getYuE(INetCallback<YUEResp> callback) {
+        new RequestHelper<YUERespD>().Url(MAIN_URL + "/api/userinfo/get_money")
+                .Method(RequestHelper.Method.GET)
+                .Result(YUERespD.class)
+                .UrlParam("logged_token", App.getToken(), true)
+                .Success(result -> {
+                    if (((YUERespD) result).getCode() != 0) {
+                        callback.Failed(((YUERespD) result).getMsg());
+                    } else {
+                        callback.Success(((YUERespD) result).getData());
+                        App.sYUE = ((YUERespD) result).getData().getMoney();
+                    }
+                }).Failed(msg -> callback.Failed((String) msg))
+                .get(mContext, mHandler);
+    }
 
 }

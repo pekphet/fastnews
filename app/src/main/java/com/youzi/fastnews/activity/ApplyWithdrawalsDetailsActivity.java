@@ -7,7 +7,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.youzi.fastnews.App;
 import com.youzi.fastnews.R;
+import com.youzi.fastnews.entity.YUEResp;
+import com.youzi.fastnews.net.INetCallback;
 
 
 /**

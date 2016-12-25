@@ -6,14 +6,14 @@ package com.youzi.fastnews.entity;
 
 public class BaseResp {
     private int         code;
-    private String      msg;
+    private String      message;
 
     public String getMsg() {
-        return msg;
+        return message;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setMsg(String message) {
+        this.message = message;
     }
 
     public int getCode() {

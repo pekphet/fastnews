@@ -8,7 +8,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.youzi.fastnews.App;
 import com.youzi.fastnews.R;
+import com.youzi.fastnews.entity.YUEResp;
+import com.youzi.fastnews.net.INetCallback;
+import com.youzi.fastnews.utils.ZToast;
 
 /**
  * Created by ywb on 2016/12/23.
@@ -35,19 +39,39 @@ public class ApplyWithdrawalsActivity extends Activity {
         im.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 finish();
-
             }
         });
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        btn.setOnClickListener(vv-> {
+            if (money.getText().toString() == "") {
+                ZToast.r(this, "请输入金额");
+            }
+            App.getNetManager().tx(new INetCallback<String>() {
+                @Override
+                public void Success(String s) {
+                    ZToast.r(ApplyWithdrawalsActivity.this, s);
+                    finish();
+                }
+
+                @Override
+                public void Failed(String msg) {
+                    ZToast.r(ApplyWithdrawalsActivity.this, msg);
+                }
+            }, money.getText().toString());
+        });
+
+        App.getNetManager().getYuE(new INetCallback<YUEResp>() {
             @Override
-            public void onClick(View v) {
+            public void Success(YUEResp yueResp) {
+                yu_e.setText(String.format("余额：％s元", yueResp.getMoney()));
+            }
 
+            @Override
+            public void Failed(String msg) {
+                yu_e.setText("无法获取余额");
+                ZToast.r(ApplyWithdrawalsActivity.this, msg);
             }
         });
-
     }
-
 }

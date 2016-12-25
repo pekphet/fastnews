@@ -31,6 +31,7 @@ public class App extends Application {
     private static Context mAppContext;
 
     public static IWXAPI iWXAPI;
+    public static String sCFID;
 
     @Override
     public void onCreate() {

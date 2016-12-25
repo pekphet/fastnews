@@ -15,8 +15,15 @@ import com.youzi.fastnews.entity.NewsListRespD;
 import com.youzi.fastnews.entity.RegisterResponseEntity;
 import com.youzi.fastnews.entity.ResponseWechatLoginEntity;
 import com.youzi.fastnews.entity.ResponseWechatUserInfoEntity;
+import com.youzi.fastnews.entity.SResp;
+import com.youzi.fastnews.entity.TXListE;
+import com.youzi.fastnews.entity.TXListResp;
+import com.youzi.fastnews.entity.TXListResponseD;
 import com.youzi.fastnews.global.WechatConstants;
 import com.youzi.fastnews.utils.DeviceUtils;
+import com.youzi.fastnews.utils.ZToast;
+
+import java.util.List;
 
 import cc.fish.fishhttp.net.RequestHelper;
 
@@ -198,5 +205,35 @@ public class NetManager implements Constants {
 
     }
 
+    //http://60.205.58.24:8084/do?feed_id=63&logged_token=63180812cfbb04a3de5aab352ceab3c4
+    public void clkZF(String feedId) {
+        new RequestHelper<SResp>().Url(MAIN_URL + "/do")
+                .Method(RequestHelper.Method.GET)
+                .Result(SResp.class)
+                .UrlParam("feed_id", feedId, true)
+                .UrlParam("logged_token", App.getToken())
+                .Success(result -> ZToast.d(mContext, "success"))
+                .Failed(msg-> ZToast.d(mContext, (String) msg))
+                .get(mContext, mHandler);
+    }
+
+    //http://60.205.58.24:8084/api/userinfo/withdrawal_list?logged_token=63180812cfbb04a3de5aab352ceab3c4
+    public void txList(INetCallback<TXListResp> callback) {
+        new RequestHelper<TXListResponseD>().Url(MAIN_URL + "/api/userinfo/withdrawal_list")
+                .Method(RequestHelper.Method.GET)
+                .Result(TXListResponseD.class)
+                .Success(result -> {
+                    if (((TXListResponseD) result).getCode() != 0) {
+                        callback.Failed(((TXListResponseD) result).getMsg());
+                        return;
+                    }
+
+                    TXListResp data = ((TXListResponseD)result).getData();
+                    callback.Success(data);
+
+                })
+                .Failed(msg-> ZToast.d(mContext, (String) msg))
+                .get(mContext, mHandler);
+    }
 
 }

@@ -108,6 +108,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
                 break;
             case ConstantsAPI.COMMAND_SENDMESSAGE_TO_WX://分享回调
                 if (resp.errCode == BaseResp.ErrCode.ERR_OK) {
+                    App.getNetManager().clkZF(App.sCFID);
                     ZToast.r(WXEntryActivity.this, "恭喜您，分享成功");
                     finish();
                 } else if (resp.errCode == BaseResp.ErrCode.ERR_USER_CANCEL) {//用户取消

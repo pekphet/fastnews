@@ -54,7 +54,7 @@ public class NewsListAdapter extends BaseAdapter {
         tv.setText(list.get(position).getArticle_name());
         v.setOnClickListener(vv-> {
             NewsDE n = list.get(position);
-            ShareWebView.startWebActivity(mContext, n.getLink(), n.getShare_link(), n.getShare_title(), n.getShare_description());
+            ShareWebView.startWebActivity(mContext, n.getLink(), n.getShare_link(), n.getShare_title(), n.getShare_description(), n.getId()+"");
         });
         return v;
     }

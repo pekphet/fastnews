@@ -51,8 +51,9 @@ public class ShareWebView extends Activity {
     }
 
     private void sent2FR() {
-        PopWindowDisplayUtil.showSharePopWindow(this, "分享", sUrl, sCon, sDes, mBtnFr);
-        //WechatUtils.wechatShare(this, App.iWXAPI, WechatConstants.WXSceneTimeline, sUrl, sCon, sDes);
+        //PopWindowDisplayUtil.showSharePopWindow(this, "分享", sUrl, sCon, sDes, mBtnFr);
+        App.sCFID = getIntent().getStringExtra("S-FID");
+        WechatUtils.wechatShare(this, App.iWXAPI, WechatConstants.WXSceneTimeline, sUrl, sCon, sDes);
 
     }
 
@@ -74,12 +75,13 @@ public class ShareWebView extends Activity {
         });
     }
 
-    public static void startWebActivity(Context c, String url, String shareUrl, String shareContent, String shareDes) {
+    public static void startWebActivity(Context c, String url, String shareUrl, String shareContent, String shareDes, String fid) {
         Intent i = new Intent(c, ShareWebView.class);
         i.putExtra("URL", url);
         i.putExtra("S-URL", shareUrl);
         i.putExtra("S-CON", shareContent);
         i.putExtra("S-DES", shareDes);
+        i.putExtra("S-FID", fid);
 
         c.startActivity(i);
     }

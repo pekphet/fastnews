@@ -73,28 +73,27 @@
 
     <color name="apply_red_color">#FF620b</color>
 
-    <color name="all_background_color">#3F3C51</color>
+    <color name="time_button_bg">#fd3c1c</color>
 
-    <color name="title_background">#302e3e</color>
+    <color name="time_button_click_bg">#e33619</color>
 
-    <color name="title_line">#000000</color>
+    <color name="about_our_top_bg">#EAEAEC</color>
 
-    <color name="habit_details_line_color">#47445A</color>
-    <color name="habit_details_red_color">#f35b5b</color>
-    <color name="un_habit_details_red_color">#cc4d4d</color>
-    <color name="habit_details_yellow_color">#47445A</color>
-    <color name="pserson_line_color">#47435b</color>
-    <color name="login_text_color">#98979f</color>
-    <color name="pesrson_bg">#373648</color>
-    <color name="twenty_habit_bg">#2f2e3e</color>
-    <color name="title_bar_bg">#353246</color>
-    <color name="header_title_bg">#3F3C51</color>
-    <color name="header_bg">#2F2E3D</color>
-    <color name="pay_method_bg">#3F3C51</color>
-    <color name="invite_line_color">#38354A</color>
-    <color name="message_title_bg">#3F3C51</color>
-    <color name="invite_friends_bg">#3F3C51</color>
-    <color name="invite_friends_header_bg">#302D3E</color>
+    <color name="about_our_bottom_bg">#E1E0E5</color>
+
+    <color name="invite_friends_context">#730602</color>
+
+    <color name="home_page_daily_check">#ff4b27</color>
+
+    <color name="home_page_start_make_money">#ffa325</color>
+
+    <color name="home_page_invite_friends">#24c7f2</color>
+
+    <color name="home_page_blue">#02adda</color>
+
+    <color name="home_page_text_color">#4d4d4d</color>
+
+    <color name="home_page_text_black_color">#989898</color>
 
 
 

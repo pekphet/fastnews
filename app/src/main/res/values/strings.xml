@@ -2,4 +2,112 @@
     <string name="app_name">FastNews</string>
     <string name="a">恭喜，你的提现申请已经成功受理，我们将在工作日48小时打款到您的微信余额中，请注意查收。</string>
     <string name="b">您的提现申请失败了，请您返回重新提现!</string>
+
+    <!--首页 -->
+    <string name="home_page_wechat_redpacket">微信抢红包</string>
+    <string name="home_page_redpacket_task_did_not_start">未开始</string>
+    <string name="home_page_redpacket_task_completed">已完成</string>
+    <string name="home_page_redpacket_task_on_going">进行中</string>
+    <string name="home_page_make_money">开始赚钱</string>
+
+    <!--我的界面 -->
+    <string name="user_id">ID:</string>
+    <string name="user_nickname">昵称:</string>
+    <string name="user_account_balance">账户余额</string>
+    <string name="user_withdrawals">提现记录</string>
+    <string name="user_apply_withdrawals">申请提现</string>
+    <string name="user_phone_bind">手机绑定</string>
+    <string name="user_wechat_bind">微信绑定</string>
+    <string name="user_friends">我的好友</string>
+    <string name="user_invita_friends">邀请好友</string>
+    <string name="user_invita_code">填写邀请码</string>
+    <string name="user_feedback">意见反馈</string>
+    <string name="user_icheck_update">检查更新</string>
+    <string name="user_setting">设置</string>
+    <string name="user_complete">保存</string>
+    <string name="user_cancel">取消</string>
+    <string name="about_our_app">关于我们</string>
+
+
+    <!--申请提现界面-->
+    <string name="apply_withdrawals_des">  提现将在1个工作日内受理，周末不打款\n 提现需绑定手机，绑定微信</string>
+    <string name="commit">提交</string>
+    <string name="apply">申请</string>
+
+    <!--绑定微信界面-->
+    <string name="first_step">步骤一：长按二维码保存至本地，或者截屏，通过微信扫一扫识别二维码，关注本地公众号</string>
+    <string name="second_step">步骤二：关注公众号，在微信中点击绑定账号，获取验证码</string>
+    <string name="third_step">步骤三：在下方输入框中输入公众号的验证码</string>
+
+    <!--邀请好友界面-->
+    <string name="invite_introduce">好友做任务，我来拿提成~~\n提成无上限，无上限，无上限!\n\n快来邀请小伙伴，来一起赚钱吧~~</string>
+    <string name="copy_url">复制链接</string>
+    <string name="quick_share">快速分享</string>
+    <string name="cancel">取消</string>
+
+    <!--用户反馈界面-->
+    <string name="feedback_commit">提交</string>
+
+    <!--红包插件界面-->
+    <string name="immediately_open">立即开启</string>
+    <string name="rob_hongbao_cumulative">已经累计抢到</string>
+    <string name="hongbao_switch_no">自动抢红包尚未开启</string>
+    <string name="hongbao_switch_yes">自动抢红包开启</string>
+    <string name="tips">找到抢红包神器2016,然后开启服务即可</string>
+    <string name="accessibility_description">启动抢红包服务,支持微信。</string>
+    <string name="trying_desperately_grab_red_envelope">拼命抢红包中</string>
+    <string name="twinkle_text">。。。</string>
+    <string name="redpacket_tutorial">抢红包教程</string>
+    <string name="start_service">已开启</string>
+    <string name="anti_title_set">防封号设置</string>
+    <string name="pref_watch_exclude_words_summary">不拆开包含这些文字的红包(空格间隔)</string>
+    <string name="pref_comment_words_summary">随机选择下列感谢语(空格间隔)</string>
+
+    <!--分享任务详情界面-->
+    <string name="reply">回复你的ID给“</string>
+    <string name="wechar_num">”微信公众号，获取</string>
+    <string name="reward">元奖励(首次关注有效)</string>
+    <string name="share_friends_circle">分享至朋友圈</string>
+
+    <!--试玩任务详情-->
+    <string name="download_and_install">下载安装</string>
+    <string name="open">打开</string>
+    <string name="complete">完成</string>
+    <string name="download">下载中，连点3下重新下载</string>
+    <string name="download_tmp">下载中.......</string>
+    <string name="download_toast">再次进入此页面可重新下载</string>
+    <string name="again_download">重新下载</string>
+    <string name="task_noaccept">任务不可接</string>
+    <string name="task_complete">今日任务已完成</string>
+    <string name="re_install">重新安装</string>
+    <string name="need_permission">需要开启权限哦亲～</string>
+    <string name="cant_get_permission">无法开启权限～</string>
+    <string name="ex_get_permission">开启权限成功～</string>
+
+
+    <!--任务详情特殊情况提示-->
+    <string name="task_detail_ex_toast_hasapp">经检测,亲安装过此应用,将为您安装最新版本,若无法安装,请卸载之前版本</string>
+    <string name="task_detail_ex_toast_ee1"></string>
+    <string name="task_detail_ex_toast_hasrec"></string>
+    <string name="task_detail_ex_toast_001">点击下载开始，若取消安装则需要重新下载</string>
+    <string name="task_detail_ex_toast_201">经检测,亲覆盖安装过此应用,将为您安装最新版本,若无法安装,请卸载之前版本</string>
+    <string name="task_detail_ex_toast_nulldb">点击下载开始,若取消安装则需要重新下载</string>
+    <string name="task_detail_ex_toast_010">点击下载开始,若取消安装则需要重新下载</string>
+
+    <string name="task_step_null">获取任务详情失败,请稍后再试</string>
+    <string name="task_step_ot">该任务已过期,请前往完成任务列表中查看</string>
+
+    <!--手机绑定界面-->
+    <string name="phone_isbind">已绑定</string>
+
+    <string name="my_countdown_reminder">距离今天红包开始剩下</string>
+    <string name="my_countdown_second_reminder">支付宝红包口令将于每晚8:00准时发布</string>
+
+    <!-- 任务列表界面 -->
+    <string name="all_task">任务列表</string>
+    <string name="doing_task">进行中</string>
+
+    <!-- 领取支付宝口令红包界面-->
+    <string name="kouling_des">1.每晚8:00准时发放百只支付宝口令红包\n2.获取口令自动复制并打开支付宝，打开红包黏贴口令即可领取，数量有限先到先得，拼手速拿现金。</string>
+
 </resources>

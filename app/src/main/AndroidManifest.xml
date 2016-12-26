@@ -31,7 +31,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.xiaozi.custom.wxapi.WXEntryActivity"
+            android:name="cc.xiaozi.fastnews.wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:screenOrientation="portrait"

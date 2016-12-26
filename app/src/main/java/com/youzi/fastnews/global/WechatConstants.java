@@ -5,8 +5,8 @@ package com.youzi.fastnews.global;
  */
 public class WechatConstants {
 
-    public static final String APP_ID = "wx768d80d4915546bd";
-    public static final String App_Secret = "bdd68f7209b7f3a09bdea280a933e439";
+    public static final String APP_ID = "wx33bd7ea23134ec1c";
+    public static final String App_Secret = "22b7ad5fb6aeea6ffc42d22bb009eb61";
 
     public static final String GET_REQUEST_ACCESS_TOKEN =
             "https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code";

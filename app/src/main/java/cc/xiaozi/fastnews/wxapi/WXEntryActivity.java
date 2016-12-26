@@ -1,4 +1,4 @@
-package com.xiaozi.custom.wxapi;
+package cc.xiaozi.fastnews.wxapi;
 
 import android.app.Activity;
 import android.content.Intent;

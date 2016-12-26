@@ -6,6 +6,8 @@ import android.os.Looper;
 
 import com.youzi.fastnews.App;
 import com.youzi.fastnews.Constants;
+import com.youzi.fastnews.entity.InviteResp;
+import com.youzi.fastnews.entity.InviteRespD;
 import com.youzi.fastnews.entity.LoginE;
 import com.youzi.fastnews.entity.LoginRespD;
 import com.youzi.fastnews.entity.NewsDResp;
@@ -16,7 +18,8 @@ import com.youzi.fastnews.entity.RegisterResponseEntity;
 import com.youzi.fastnews.entity.ResponseWechatLoginEntity;
 import com.youzi.fastnews.entity.ResponseWechatUserInfoEntity;
 import com.youzi.fastnews.entity.SResp;
-import com.youzi.fastnews.entity.TXListE;
+import com.youzi.fastnews.entity.ShareRuleResp;
+import com.youzi.fastnews.entity.ShareRuleRespD;
 import com.youzi.fastnews.entity.TXListResp;
 import com.youzi.fastnews.entity.TXListResponseD;
 import com.youzi.fastnews.entity.YUEResp;
@@ -24,8 +27,6 @@ import com.youzi.fastnews.entity.YUERespD;
 import com.youzi.fastnews.global.WechatConstants;
 import com.youzi.fastnews.utils.DeviceUtils;
 import com.youzi.fastnews.utils.ZToast;
-
-import java.util.List;
 
 import cc.fish.fishhttp.net.RequestHelper;
 
@@ -148,7 +149,7 @@ public class NetManager implements Constants {
 
     public void loginIn(INetCallback<RegisterResponseEntity> callback, String accessToken, String openId, String unionId, String nickname, String sex, String headimgurl, String parentID) {
         new RequestHelper<ResponseWechatLoginEntity>().Method(RequestHelper.Method.POST)
-                .Url("http://60.205.58.24:8084/api/user/wechat_login")
+                .Url(MAIN_URL + "/api/user/wechat_login")
                 .Result(RegisterResponseEntity.class)
                 .PostParam(REQUEST_PARAM_REGISTER_ACCESS_TOKEN, accessToken)
                 .PostParam(REQUEST_PARAM_REGISTER_OPENID, openId)
@@ -214,7 +215,7 @@ public class NetManager implements Constants {
 
     //http://60.205.58.24:8084/do?feed_id=63&logged_token=63180812cfbb04a3de5aab352ceab3c4
     public void clkZF(String feedId) {
-        new RequestHelper<SResp>().Url(MAIN_URL + "/do")
+        new RequestHelper<SResp>().Url(MAIN_URL + "/api/userfeed/do")
                 .Method(RequestHelper.Method.GET)
                 .Result(SResp.class)
                 .UrlParam("feed_id", feedId, true)
@@ -279,4 +280,30 @@ public class NetManager implements Constants {
                 .get(mContext, mHandler);
     }
 
+    public void getShRule(INetCallback<ShareRuleResp> callback) {
+        new RequestHelper<ShareRuleRespD>().Url(MAIN_URL + "/api/feeds/get_rule")
+                .Method(RequestHelper.Method.GET)
+                .Result(ShareRuleRespD.class)
+                .Success(result -> {
+                    if (((ShareRuleRespD)result).getCode() != 0) {
+                        callback.Failed(((ShareRuleRespD)result).getMsg());
+                    } else {
+                        callback.Success(((ShareRuleRespD)result).getData());
+                    }
+                }).Failed(msg -> callback.Failed((String) msg)).get(mContext, mHandler);
+    }
+
+    public void getInvRule(INetCallback<InviteResp> callback) {
+        new RequestHelper<InviteRespD>().Url(MAIN_URL + "/api/userinfo/invite_page")
+                .Method(RequestHelper.Method.GET)
+                .Result(InviteRespD.class)
+                .UrlParam("logged_token", App.getToken(), true)
+                .Success(result -> {
+                    if (((InviteRespD)result).getCode() != 0) {
+                        callback.Failed(((InviteRespD)result).getMsg());
+                    } else {
+                        callback.Success(((InviteRespD)result).getData());
+                    }
+                }).Failed(msg -> callback.Failed((String) msg)).get(mContext, mHandler);
+    }
 }

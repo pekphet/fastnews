@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.youzi.fastnews.App;
 import com.youzi.fastnews.R;
-import com.youzi.fastnews.entity.YUEResp;
+import com.youzi.fastnews.entity.TXListResp;
 import com.youzi.fastnews.net.INetCallback;
 
 
@@ -47,5 +47,18 @@ public class ApplyWithdrawalsDetailsActivity extends Activity {
             }
         });
 
+        App.getNetManager().txList(new INetCallback<TXListResp>() {
+            @Override
+            public void Success(TXListResp txListResp) {
+                if (txListResp.getWithdrawal_list() == null || txListResp.getWithdrawal_list().isEmpty()) {
+
+                }
+            }
+
+            @Override
+            public void Failed(String msg) {
+
+            }
+        });
     }
 }

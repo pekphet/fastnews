@@ -1,7 +1,10 @@
 package com.youzi.fastnews.fragment;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -39,19 +42,14 @@ public class VFragment extends BaseFragment implements XListView.IXListViewListe
 
     private int ccl = 0;
 
-
+    @Nullable
     @Override
-    protected View initView(LayoutInflater inflater) {
-        View v = inflater.inflate(R.layout.f_n, null);
-        mScrollView = (HorizontalScrollView) v.findViewById(R.id.scroll);
-        mLlBtnGrp = (LinearLayout) v.findViewById(R.id.ll_btns);
-        mXl = (XListView) v.findViewById(R.id.xlv);
-        mXl.setXListViewListener(this);
-        return v;
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        initOnce();
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
-    @Override
-    protected void initData() {
+    private void initOnce() {
         App.getNetManager().loadNewsList(2, new INetCallback<NewsListResp>() {
             @Override
             public void Success(NewsListResp newsListResp) {
@@ -64,6 +62,22 @@ public class VFragment extends BaseFragment implements XListView.IXListViewListe
             }
         });
         params = new LinearLayout.LayoutParams(getItemWidth(PIECES), LinearLayout.LayoutParams.MATCH_PARENT);
+    }
+
+    @Override
+    protected View initView(LayoutInflater inflater) {
+        View v = inflater.inflate(R.layout.f_n, null);
+        mScrollView = (HorizontalScrollView) v.findViewById(R.id.scroll);
+        mScrollView.setVisibility(View.GONE);
+        mLlBtnGrp = (LinearLayout) v.findViewById(R.id.ll_btns);
+        mXl = (XListView) v.findViewById(R.id.xlv);
+        mXl.setXListViewListener(this);
+        return v;
+    }
+
+    @Override
+    protected void initData() {
+
     }
 
     private void flushUI() {

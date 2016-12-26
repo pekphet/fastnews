@@ -25,10 +25,17 @@ public class HomeActivity extends BaseFragmentActivity {
     private final static int[]      BOTTOM_ICON_UNCHECKED   = {R.drawable.i_h_n, R.drawable.i_h_v, R.drawable.i_h_p};
     private final static String[]   BOTTOM_TEXT_ARRAY       = {"新闻", "视频", "个人"};
 
+    private static HomeActivity self = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.a_h);
+        self = this;
+        checkUpdate();
         super.onCreate(savedInstanceState);
+    }
+
+    private void checkUpdate() {
+
     }
 
     @Override
@@ -72,5 +79,12 @@ public class HomeActivity extends BaseFragmentActivity {
     @Override
     protected void checkAllBottomItem(View item, int position, boolean isChecked) {
         ((ImageView) item.findViewById(R.id.home_page_bottom_image)).setImageResource(isChecked ? BOTTOM_ICON_CHECKED[position] : BOTTOM_ICON_UNCHECKED[position]);
+    }
+
+    public static void sel(int index) {
+        if (self == null) {
+            return;
+        }
+        self.setTabSel(self.getBottomLayout().getChildAt(index), index);
     }
 }

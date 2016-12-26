@@ -7,12 +7,12 @@ import android.os.Bundle;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.youzi.fastnews.App;
 import com.youzi.fastnews.R;
 import com.youzi.fastnews.global.WechatConstants;
-import com.youzi.fastnews.utils.PopWindowDisplayUtil;
 import com.youzi.fastnews.utils.WechatUtils;
 
 /**
@@ -22,9 +22,9 @@ import com.youzi.fastnews.utils.WechatUtils;
 public class ShareWebView extends Activity {
 
     private WebView mWb;
-    private Button mBtn;
-    private Button mBtnRt;
-    private Button mBtnFr;
+    private TextView mBtn;
+    private ImageButton mBtnRt;
+    private TextView mBtnFr;
     private String sUrl;
     private String sCon;
     private String sDes;
@@ -34,9 +34,9 @@ public class ShareWebView extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.a_shw);
         mWb = (WebView) findViewById(R.id.web);
-        mBtn = (Button) findViewById(R.id.btn_share);
-        mBtnRt = (Button) findViewById(R.id.btn_retn);
-        mBtnFr = (Button) findViewById(R.id.btn_s2fr);
+        mBtn = (TextView) findViewById(R.id.btn_share);
+        mBtnRt = (ImageButton) findViewById(R.id.btn_retn);
+        mBtnFr = (TextView) findViewById(R.id.btn_s2fr);
 
         sUrl = getIntent().getStringExtra("S-URL");
         sCon = getIntent().getStringExtra("S-CON");
@@ -53,7 +53,7 @@ public class ShareWebView extends Activity {
     private void sent2FR() {
         //PopWindowDisplayUtil.showSharePopWindow(this, "分享", sUrl, sCon, sDes, mBtnFr);
         App.sCFID = getIntent().getStringExtra("S-FID");
-        WechatUtils.wechatShare(this, App.iWXAPI, WechatConstants.WXSceneTimeline, sUrl, sCon, sDes);
+        WechatUtils.wechatShare(this, App.iWXAPI, WechatConstants.WXSceneTimeline, sUrl.replace("{logged_token}", App.getToken()), sCon, sDes);
 
     }
 

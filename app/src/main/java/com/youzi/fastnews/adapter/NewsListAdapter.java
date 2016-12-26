@@ -50,8 +50,10 @@ public class NewsListAdapter extends BaseAdapter {
         View v = LayoutInflater.from(mContext).inflate(R.layout.i_n, null);
         ImageView img = (ImageView) v.findViewById(R.id.img);
         TextView tv = (TextView) v.findViewById(R.id.tv_title);
+        TextView tvC = (TextView) v.findViewById(R.id.tv_content);
         ImageLoader.getInstance().displayImage(list.get(position).getImage(), img);
         tv.setText(list.get(position).getArticle_name());
+        tvC.setText(list.get(position).getDescription());
         v.setOnClickListener(vv-> {
             NewsDE n = list.get(position);
             ShareWebView.startWebActivity(mContext, n.getLink(), n.getShare_link(), n.getShare_title(), n.getShare_description(), n.getId()+"");

@@ -1,47 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-
+    android:layout_height="match_parent">
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp"
-        android:src="@drawable/ic_lau" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/lgn_bg"
+        android:scaleType="centerCrop"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:text="火速新闻"
-        android:textColor="@color/first_text_color"
-        android:textSize="@dimen/first_text_size" />
-
-    <LinearLayout
+    <Button
         android:id="@+id/loginss_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_lau" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="立即登录"
-            android:textColor="@color/third_text_color"
-            android:textSize="@dimen/first_text_size" />
-
-    </LinearLayout>
+        android:background="@drawable/wxlgn"
+        android:layout_centerInParent="true"/>
 
 
-</LinearLayout>
+
+
+
+</RelativeLayout>

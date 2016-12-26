@@ -6,14 +6,14 @@
     <HorizontalScrollView android:id="@+id/scroll"
                           android:layout_width="match_parent"
                           android:layout_height="wrap_content"
-                          android:background="#00BBF5"
+                          android:background="#545EEE"
                           android:scrollbars="none">
 
         <LinearLayout
             android:id="@+id/ll_btns"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:background="#00BBF5"
+            android:background="#545EEE"
             android:orientation="horizontal" />
     </HorizontalScrollView>
     <cc.fish.coreui.view.xlistview.XListView

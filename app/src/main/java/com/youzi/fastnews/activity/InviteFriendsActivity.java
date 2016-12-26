@@ -11,13 +11,15 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youzi.fastnews.App;
 import com.youzi.fastnews.R;
 import com.youzi.fastnews.adapter.InviteAdapter;
-import com.youzi.fastnews.global.WechatConstants;
+import com.youzi.fastnews.entity.InviteResp;
+import com.youzi.fastnews.net.INetCallback;
 import com.youzi.fastnews.utils.ImageTools;
+import com.youzi.fastnews.utils.PopWindowDisplayUtil;
 import com.youzi.fastnews.utils.TextUtil;
-import com.youzi.fastnews.utils.WechatUtils;
 import com.youzi.fastnews.view.BasePopwindow;
 import com.youzi.fastnews.view.MyListView;
 
@@ -61,6 +63,7 @@ public class InviteFriendsActivity extends Activity implements View.OnClickListe
     private String shareUrl;
     private String shareTitle;
     private String shareContent;
+    private TextView mTvIRule;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,8 +74,19 @@ public class InviteFriendsActivity extends Activity implements View.OnClickListe
     }
 
     private void initData() {
+        App.getNetManager().getInvRule(new INetCallback<InviteResp>() {
+            @Override
+            public void Success(InviteResp r) {
+                ImageLoader.getInstance().displayImage(r.getQrcode_uri(), qrCode);
+                inviteFriendsUrl.setText(r.getInvite_link());
+                mTvIRule.setText(r.getInvite_rule());
+            }
 
+            @Override
+            public void Failed(String msg) {
 
+            }
+        });
     }
 
     public void initView() {
@@ -93,11 +107,13 @@ public class InviteFriendsActivity extends Activity implements View.OnClickListe
 
         copyQrcodeTv = (TextView) findViewById(R.id.copy_invite_code_tv);
 
-        listView = (MyListView) findViewById(R.id.invite_rule_listview);
+        mTvIRule = (TextView) findViewById(R.id.tv_irule);
+
+//        listView = (MyListView) findViewById(R.id.invite_rule_listview);
 
         adapter = new InviteAdapter(this, entities);
 
-        listView.setAdapter(adapter);
+//        listView.setAdapter(adapter);
 
         if (!TextUtils.isEmpty(masterID)) {
             master.setText("我的邀请码：" + masterID);
@@ -163,7 +179,8 @@ public class InviteFriendsActivity extends Activity implements View.OnClickListe
                     return;
                 }
 
-                WechatUtils.wechatShare(InviteFriendsActivity.this, App.iWXAPI, WechatConstants.WXSceneTimeline, shareUrl, shareTitle, shareContent);
+                PopWindowDisplayUtil.showSharePopWindow(InviteFriendsActivity.this, "邀请好友", shareUrl, shareTitle, shareContent, v);
+//                WechatUtils.wechatShare(InviteFriendsActivity.this, App.iWXAPI, WechatConstants.WXSceneTimeline, shareUrl, shareTitle, shareContent);
 
                 break;
 

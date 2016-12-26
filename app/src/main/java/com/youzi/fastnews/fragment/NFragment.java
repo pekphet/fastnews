@@ -1,7 +1,10 @@
 package com.youzi.fastnews.fragment;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -39,6 +42,27 @@ public class NFragment extends BaseFragment implements XListView.IXListViewListe
 
     private int ccl = 0;
 
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        initOnce();
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    private void initOnce() {
+        App.getNetManager().loadNewsList(1, new INetCallback<NewsListResp>() {
+            @Override
+            public void Success(NewsListResp newsListResp) {
+                mNList = newsListResp;
+                flushUI();
+            }
+            @Override
+            public void Failed(String msg) {
+
+            }
+        });
+        params = new LinearLayout.LayoutParams(getItemWidth(PIECES), LinearLayout.LayoutParams.MATCH_PARENT);
+    }
 
     @Override
     protected View initView(LayoutInflater inflater) {
@@ -52,18 +76,7 @@ public class NFragment extends BaseFragment implements XListView.IXListViewListe
 
     @Override
     protected void initData() {
-        App.getNetManager().loadNewsList(1, new INetCallback<NewsListResp>() {
-            @Override
-            public void Success(NewsListResp newsListResp) {
-                mNList = newsListResp;
-                flushUI();
-            }
-            @Override
-            public void Failed(String msg) {
 
-            }
-        });
-        params = new LinearLayout.LayoutParams(getItemWidth(PIECES), LinearLayout.LayoutParams.MATCH_PARENT);
     }
 
     private void flushUI() {
@@ -93,7 +106,7 @@ public class NFragment extends BaseFragment implements XListView.IXListViewListe
             v.setLayoutParams(params);
             if (i == is) {
                 tv.setBackgroundResource(R.drawable.r_shape);
-                tv.setTextColor(0xff00bbf5);
+                tv.setTextColor(0xff545eee);
             }
             int finalI = i;
             v.setOnClickListener(vvvv  -> {

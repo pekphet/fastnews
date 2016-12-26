@@ -16,12 +16,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:background="#00ccb2">
+                android:background="#545EEE">
                 <com.youzi.fastnews.utils.CircleImageView
                     android:id="@+id/img_head"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginTop="20dp"/>
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:src="@drawable/i_d_head"
+                    android:layout_marginTop="25dp"/>
 
                 <TextView
                     android:id="@+id/per_login_tv"
@@ -29,11 +30,14 @@
                     android:layout_height="wrap_content"
                     android:textSize="20dp"
                     android:textColor="#ffffff"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="10dp"
                     android:text="微信登陆"/>
-
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/l_hf_rd"/>
+
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -43,11 +47,13 @@
                     android:id="@+id/tv_money"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="23dp"
+                    android:textSize="20dp"
+                    android:textColor="#464646"
                     android:layout_centerInParent="true"
-                    android:text="00:00"/>
+                    android:text="00.00"/>
 
                 <TextView
+                    android:textColor="#464646"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="15dp"
@@ -60,17 +66,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
+                android:textColor="#989898"
                 android:layout_gravity="center_horizontal"
                 android:text="我的余额"/>
 
             <Button
                 android:id="@+id/btn_get_money"
-                android:layout_width="220dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:textSize="21dp"
-                android:background="#0000ff"
+                android:layout_marginTop="20dp"
+                android:textSize="18dp"
+                android:background="@drawable/blue_btn_sel"
                 android:textColor="#ffffff"
                 android:text="申请提现"
                 android:padding="10dp"
@@ -89,14 +96,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:layout_marginTop="10dp"
-                android:background="#000000"/>
+                android:background="#cccccc"/>
             <LinearLayout
                 android:id="@+id/ll_invite"
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/i_inv_p"
                     android:layout_marginLeft="20dp"/>
@@ -106,6 +113,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
+                    android:textColor="#464646"
                     android:text="邀请好友"/>
 
                 <RelativeLayout
@@ -122,16 +130,16 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#000000"/>
+                android:layout_height="0.5dp"
+                android:background="#cccccc"/>
 
             <LinearLayout
                 android:id="@+id/ll_invite_r"
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/i_inv_r"
                     android:layout_marginLeft="20dp"/>
@@ -141,6 +149,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
+                    android:textColor="#464646"
                     android:text="邀请排行榜"/>
 
                 <RelativeLayout
@@ -157,16 +166,16 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#000000"/>
+                android:layout_height="0.5dp"
+                android:background="#cccccc"/>
 
             <LinearLayout
                 android:id="@+id/ll_sh"
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/i_sh_p"
                     android:layout_marginLeft="20dp"/>
@@ -176,6 +185,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
+                    android:textColor="#464646"
                     android:text="分享文章"/>
 
                 <RelativeLayout
@@ -192,15 +202,15 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#000000"/>
+                android:layout_height="0.5dp"
+                android:background="#cccccc"/>
             <LinearLayout
                 android:id="@+id/ll_sh_r"
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/i_sh_r"
                     android:layout_marginLeft="20dp"/>
@@ -210,6 +220,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
+                    android:textColor="#464646"
                     android:text="分享排行榜"/>
 
                 <RelativeLayout
@@ -223,7 +234,10 @@
                         android:layout_marginRight="20dp"/>
                 </RelativeLayout>
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#cccccc"/>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

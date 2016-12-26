@@ -9,7 +9,7 @@
         android:id="@+id/tv"
         android:layout_width="60dp"
         android:layout_height="25dp"
-        android:background="#00bbf5"
+        android:background="#545eee"
         android:textSize="16dp"
         android:textColor="#ffffff"
         android:gravity="center"/>

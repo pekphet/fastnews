@@ -14,6 +14,8 @@ import com.youzi.fastnews.entity.YUEResp;
 import com.youzi.fastnews.net.INetCallback;
 import com.youzi.fastnews.utils.ZToast;
 
+import static com.youzi.fastnews.R.id.yu_e;
+
 /**
  * Created by ywb on 2016/12/23.
  *
@@ -23,6 +25,7 @@ import com.youzi.fastnews.utils.ZToast;
 public class ApplyWithdrawalsActivity extends Activity {
 
     private String moneyss;
+    private TextView mYu_e;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +34,7 @@ public class ApplyWithdrawalsActivity extends Activity {
 
         ImageView im = (ImageView) findViewById(R.id.apply_back);
         EditText money = (EditText) findViewById(R.id.money);
-        TextView yu_e = (TextView) findViewById(R.id.yu_e);
+        mYu_e = (TextView) findViewById(yu_e);
         Button btn = (Button) findViewById(R.id.btn);
 
         moneyss = money.getText().toString();
@@ -51,6 +54,7 @@ public class ApplyWithdrawalsActivity extends Activity {
                 @Override
                 public void Success(String s) {
                     ZToast.r(ApplyWithdrawalsActivity.this, s);
+                    flushYUE();
                     finish();
                 }
 
@@ -61,15 +65,19 @@ public class ApplyWithdrawalsActivity extends Activity {
             }, money.getText().toString());
         });
 
+        flushYUE();
+    }
+
+    private void flushYUE() {
         App.getNetManager().getYuE(new INetCallback<YUEResp>() {
             @Override
             public void Success(YUEResp yueResp) {
-                yu_e.setText(String.format("余额：%.2f元", yueResp.getMoney()));
+                mYu_e.setText(String.format("余额：%.2f元", yueResp.getMoney()));
             }
 
             @Override
             public void Failed(String msg) {
-                yu_e.setText("无法获取余额");
+                mYu_e.setText("无法获取余额");
                 ZToast.r(ApplyWithdrawalsActivity.this, msg);
             }
         });

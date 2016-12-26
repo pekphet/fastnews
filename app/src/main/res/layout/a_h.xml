@@ -13,6 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:textColor="#464646"
             android:text="火速新闻"/>
 
         <Button
@@ -30,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:visibility="gone"
-        android:background="#000000"/>
+        android:background="#cccccc"/>
 
     <FrameLayout
         android:id="@+id/fl_content"
@@ -40,7 +41,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="#000000"/>
+        android:background="#cccccc"/>
 
     <LinearLayout
         android:id="@+id/ll_home_bottom"

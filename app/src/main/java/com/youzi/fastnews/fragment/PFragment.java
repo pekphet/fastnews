@@ -40,6 +40,7 @@ public class PFragment extends BaseFragment {
     private ImageView mImgH;
 
     private float txShh = 0.0f;
+    private TextView mTvMoney;
 
     @Override
     protected View initView(LayoutInflater inflater) {
@@ -51,6 +52,7 @@ public class PFragment extends BaseFragment {
         btn_get_money = (Button) v.findViewById(R.id.btn_get_money);
         apply_during_tv = (TextView) v.findViewById(R.id.apply_during_tv);
         per_login_tv = (TextView) v.findViewById(R.id.per_login_tv);
+        mTvMoney = (TextView) v.findViewById(R.id.tv_money);
         mImgH = (ImageView) v.findViewById(R.id.img_head);
 
 
@@ -61,15 +63,29 @@ public class PFragment extends BaseFragment {
         btn_get_money.setOnClickListener(this);
         apply_during_tv.setOnClickListener(this);
         //per_login_tv.setOnClickListener(this);
-        ImageLoader.getInstance().displayImage(App.getHeadUrl(), mImgH);
+        if (App.getHeadUrl() != null && !App.getHeadUrl().equals("")) {
+            ImageLoader.getInstance().displayImage(App.getHeadUrl(), mImgH);
+        }
         per_login_tv.setText(App.getNick());
+        flushTXL();
+
+        return v;
+    }
+
+    private void flushTXL() {
+        apply_during_tv.setVisibility(View.VISIBLE);
         if (txShh != 0.0f) {
-            apply_during_tv.setText(String.format("您有一笔%.2f元提现正在处理中", txShh));
+            if (txShh == -1.0f) {
+                apply_during_tv.setText("恭喜您, 您的提现审核已通过");
+            } else if (txShh == -2.0f) {
+                apply_during_tv.setText("抱歉, 您的提现审核没有通过");
+            } else {
+                apply_during_tv.setText(String.format("您有一笔%.2f元提现正在处理中", txShh));
+            }
+
         } else {
             apply_during_tv.setVisibility(View.GONE);
         }
-
-        return v;
     }
 
     @Override
@@ -80,9 +96,14 @@ public class PFragment extends BaseFragment {
                 if (txListResp != null && txListResp.getWithdrawal_list()!= null && txListResp.getWithdrawal_list().size() > 0) {
                     if (txListResp.getWithdrawal_list().get(0).getStatus().equals("待审核")) {
                         txShh = txListResp.getWithdrawal_list().get(0).getPoint();
+                    } else if (txListResp.getWithdrawal_list().get(0).getStatus().equals("审核通过")) {
+                        txShh = -1.0f;
+                    } else if (txListResp.getWithdrawal_list().get(0).getStatus().equals("审核不通过")){
+                        txShh = -2.0f;
                     } else {
 
                     }
+                    flushTXL();
                 }
             }
 
@@ -91,6 +112,18 @@ public class PFragment extends BaseFragment {
 
             }
         });
+        App.getNetManager().getYuE(new INetCallback<YUEResp>() {
+            @Override
+            public void Success(YUEResp yueResp) {
+                mTvMoney.setText(yueResp.getMoney() + "");
+            }
+
+            @Override
+            public void Failed(String msg) {
+
+            }
+        });
+
     }
 
     @Override
@@ -120,5 +153,11 @@ public class PFragment extends BaseFragment {
             default:
                 break;
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mTvMoney.setText(App.sYUE + "");
     }
 }

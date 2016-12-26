@@ -5,7 +5,7 @@ android {
     compileSdkVersion 23
     buildToolsVersion '25.0.1'
     defaultConfig {
-        applicationId "com.xiaozi.custom"
+        applicationId "cc.xiaozi.fastnews"
         minSdkVersion 15
         targetSdkVersion 25
         versionCode 1

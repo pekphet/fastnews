@@ -95,6 +95,7 @@
 
     <color name="home_page_text_black_color">#989898</color>
 
-
+    <color name="blue_btn">#545eee</color>
+    <color name="blue_btn_checked">#434bbe</color>
 
 </resources>

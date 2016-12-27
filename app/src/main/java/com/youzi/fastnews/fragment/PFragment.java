@@ -55,6 +55,8 @@ public class PFragment extends BaseFragment {
         mTvMoney = (TextView) v.findViewById(R.id.tv_money);
         mImgH = (ImageView) v.findViewById(R.id.img_head);
 
+        mLlInviteR.setVisibility(View.GONE);
+        mLlShareR.setVisibility(View.GONE);
 
         mLlInvite.setOnClickListener(this);
         mLlInviteR.setOnClickListener(this);

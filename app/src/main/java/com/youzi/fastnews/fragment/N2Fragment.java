@@ -33,6 +33,8 @@ public class N2Fragment extends BaseFragment {
     public NewsListAdapter mAdapter = null;
     private HomeWebView mWbH;
     private int ccl = 0;
+    public static int gCategory1 = 1;
+    public static int gCategory2 = 0;
 
 
     @Nullable
@@ -49,6 +51,7 @@ public class N2Fragment extends BaseFragment {
             public void Success(NewsListResp newsListResp) {
                 mNList = newsListResp;
                 mWbH.loadUrl(mNList.getRows().get(0).getLink());
+                gCategory2 = mNList.getRows().get(0).getId();
                 flushUI();
             }
             @Override
@@ -74,7 +77,7 @@ public class N2Fragment extends BaseFragment {
 
     @Override
     protected void initData() {
-
+        gCategory1 = 1;
     }
 
     private void flushUI() {
@@ -118,6 +121,7 @@ public class N2Fragment extends BaseFragment {
         if (ccl == index) {
             return;
         }
+        gCategory2 = mNList.getRows().get(index).getId();
         int itemWidth = v.getWidth();
         initList(index);
         ccl = index;

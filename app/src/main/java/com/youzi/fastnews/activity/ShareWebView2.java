@@ -12,8 +12,11 @@ import android.widget.TextView;
 
 import com.youzi.fastnews.App;
 import com.youzi.fastnews.R;
+import com.youzi.fastnews.entity.BaseResp;
 import com.youzi.fastnews.global.WechatConstants;
+import com.youzi.fastnews.net.INetCallback;
 import com.youzi.fastnews.utils.WechatUtils;
+import com.youzi.fastnews.utils.ZToast;
 
 /**
  * Created by fish on 16-12-27.
@@ -27,6 +30,8 @@ public class ShareWebView2 extends Activity {
     private String sUrl;
     private String sCon;
     private String sDes;
+    private int mCat1;
+    private int mCat2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,23 +42,39 @@ public class ShareWebView2 extends Activity {
         mBtnRt = (ImageButton) findViewById(R.id.btn_retn);
         mBtnFr = (TextView) findViewById(R.id.btn_s2fr);
 
-        sUrl = getIntent().getStringExtra("S-URL");
-        sCon = getIntent().getStringExtra("S-CON");
-        sDes = getIntent().getStringExtra("S-DES");
-
         initWebView();
+        mCat1 = getIntent().getIntExtra("CATEGORY1", -1);
+        mCat2 = getIntent().getIntExtra("CATEGORY2", -1);
+
         mWb.loadUrl(getIntent().getStringExtra("URL"));
         mBtn.setOnClickListener(v->startActivity(new Intent(this, ShareActivity.class)));
         mBtnRt.setOnClickListener(v->finish());
         mBtnFr.setOnClickListener(v->sent2FR());
 
+        loadShareUrl();
+    }
+
+    private void loadShareUrl() {
+        mBtnFr.setText("正在获取分享连接");
+        mBtnFr.setEnabled(false);
+        App.getNetManager().transUrl(getIntent().getStringExtra("URL"), mCat1, mCat2, new INetCallback<BaseResp>() {
+            @Override
+            public void Success(BaseResp baseResp) {
+                mBtnFr.setEnabled(true);
+                mBtnFr.setText("转发到朋友圈");
+            }
+
+            @Override
+            public void Failed(String msg) {
+                ZToast.r(ShareWebView2.this, msg);
+                mBtnFr.setText("获取分享连接失败");
+            }
+        });
     }
 
     private void sent2FR() {
         //PopWindowDisplayUtil.showSharePopWindow(this, "分享", sUrl, sCon, sDes, mBtnFr);
-        App.sCFID = getIntent().getStringExtra("S-FID");
         WechatUtils.wechatShare(this, App.iWXAPI, WechatConstants.WXSceneTimeline, sUrl.replace("{logged_token}", App.getToken()), sCon, sDes);
-
     }
 
     private void initWebView() {
@@ -74,9 +95,11 @@ public class ShareWebView2 extends Activity {
         });
     }
 
-    public static void startWeb2Activity(Context c, String url) {
+    public static void startWeb2Activity(Context c, String url, int c1, int c2) {
         Intent i = new Intent(c, ShareWebView2.class);
         i.putExtra("URL", url);
+        i.putExtra("CATEGORY1", c1);
+        i.putExtra("CATEGORY2", c2);
         c.startActivity(i);
     }
 }

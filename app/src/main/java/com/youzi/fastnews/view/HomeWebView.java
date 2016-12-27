@@ -8,6 +8,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.youzi.fastnews.activity.ShareWebView2;
+import com.youzi.fastnews.fragment.N2Fragment;
 
 /**
  * Created by fish on 16-12-27.
@@ -46,7 +47,7 @@ public class HomeWebView extends WebView{
         setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                ShareWebView2.startWeb2Activity(getContext(), url);
+                ShareWebView2.startWeb2Activity(getContext(), url, N2Fragment.gCategory1, N2Fragment.gCategory2);
                 return true;
             }
         });

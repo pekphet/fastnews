@@ -6,6 +6,7 @@ import android.os.Looper;
 
 import com.youzi.fastnews.App;
 import com.youzi.fastnews.Constants;
+import com.youzi.fastnews.entity.BaseResp;
 import com.youzi.fastnews.entity.InviteResp;
 import com.youzi.fastnews.entity.InviteRespD;
 import com.youzi.fastnews.entity.LoginE;
@@ -310,7 +311,21 @@ public class NetManager implements Constants {
                 }).Failed(msg -> callback.Failed((String) msg)).get(mContext, mHandler);
     }
 
-    public void transUrl(String url, INetCallback callback) {
+    public void transUrl(String url, int cat1, int cat2, INetCallback<BaseResp> callback) {
+        new RequestHelper<BaseResp>().Url(MAIN_URL + "/api/feeds/add_feed")
+                .Method(RequestHelper.Method.POST)
+                .Result(BaseResp.class)
+                .PostParam("category_id",    cat1+ "", true)
+                .PostParam("category_id2",   cat2+ "")
+                .PostParam("link",           url)
+                .Success(result -> {
+                    if (((BaseResp)result).getCode() != 0) {
+                        callback.Failed(((BaseResp)result).getMsg());
+                    } else {
+                        callback.Success((BaseResp)result);
+                    }
+                }).Failed(msg -> callback.Failed((String) msg))
+                .post(mContext, mHandler);
 
     }
 

@@ -15,6 +15,7 @@ import com.youzi.fastnews.adapter.NewsListAdapter;
 import com.youzi.fastnews.entity.NewsDResp;
 import com.youzi.fastnews.entity.NewsListResp;
 import com.youzi.fastnews.net.INetCallback;
+import com.youzi.fastnews.utils.ZToast;
 
 import cc.fish.coreui.BaseFragment;
 import cc.fish.coreui.view.xlistview.XListView;
@@ -71,6 +72,7 @@ public class NFragment extends BaseFragment implements XListView.IXListViewListe
         mLlBtnGrp = (LinearLayout) v.findViewById(R.id.ll_btns);
         mXl = (XListView) v.findViewById(R.id.xlv);
         mXl.setXListViewListener(this);
+        mXl.setPullLoadEnable(true);
         return v;
     }
 
@@ -110,7 +112,7 @@ public class NFragment extends BaseFragment implements XListView.IXListViewListe
             }
             int finalI = i;
             v.setOnClickListener(vvvv  -> {
-                onItemClick(v, finalI);
+                onItemClick(vvvv, finalI);
             });
             mLlBtnGrp.addView(v);
         }
@@ -142,12 +144,10 @@ public class NFragment extends BaseFragment implements XListView.IXListViewListe
             }
         });
         if (!isScrolling) {
-            if (index > 5) {
-                index = 5;
-            } else if (index < 2) {
+             if (index < 2) {
                 index = 2;
             }
-            if (mNList.getRows().size() > 5) {
+            if (mNList.getRows().size() >= 5) {
                 mScrollView.smoothScrollTo((index - 2) * itemWidth, 40);
             }
         }
@@ -186,7 +186,11 @@ public class NFragment extends BaseFragment implements XListView.IXListViewListe
             @Override
             public void Success(NewsDResp newsDResp) {
                 freshList(newsDResp, true);
-                mXl.stopRefresh();
+                mXl.stopLoadMore();
+                if (newsDResp.getRows() == null || newsDResp.getRows().isEmpty()) {
+                    page --;
+                    ZToast.r(getActivity(), "没有更多数据了");
+                }
             }
             @Override
             public void Failed(String msg) {

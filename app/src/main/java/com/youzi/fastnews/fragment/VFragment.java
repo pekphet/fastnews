@@ -15,9 +15,12 @@ import com.youzi.fastnews.adapter.NewsListAdapter;
 import com.youzi.fastnews.entity.NewsDResp;
 import com.youzi.fastnews.entity.NewsListResp;
 import com.youzi.fastnews.net.INetCallback;
+import com.youzi.fastnews.utils.ZToast;
 
 import cc.fish.coreui.BaseFragment;
 import cc.fish.coreui.view.xlistview.XListView;
+
+import static android.view.View.GONE;
 
 
 /**
@@ -35,7 +38,7 @@ public class VFragment extends BaseFragment implements XListView.IXListViewListe
     public LinearLayout.LayoutParams params = null;
     public NewsListAdapter mAdapter = null;
 
-    private int cCid = 0;
+    private int cCid = 2;
     private int cCid2 = 0;
     private int page = 1;
     private XListView mXl;
@@ -68,10 +71,11 @@ public class VFragment extends BaseFragment implements XListView.IXListViewListe
     protected View initView(LayoutInflater inflater) {
         View v = inflater.inflate(R.layout.f_n, null);
         mScrollView = (HorizontalScrollView) v.findViewById(R.id.scroll);
-        mScrollView.setVisibility(View.GONE);
         mLlBtnGrp = (LinearLayout) v.findViewById(R.id.ll_btns);
+        mScrollView.setVisibility(GONE);
         mXl = (XListView) v.findViewById(R.id.xlv);
         mXl.setXListViewListener(this);
+        mXl.setPullLoadEnable(true);
         return v;
     }
 
@@ -82,7 +86,9 @@ public class VFragment extends BaseFragment implements XListView.IXListViewListe
 
     private void flushUI() {
         initList(ccl);
-        App.getNetManager().loadNewsCategory(new INetCallback<NewsDResp>() {
+        cCid = mNList.getRows().get(0).getParent_id();
+        cCid2 = mNList.getRows().get(0).getId();
+        App.getNetManager().loadNewsCategory(cCid, cCid2, page, new INetCallback<NewsDResp>(){
             @Override
             public void Success(NewsDResp newsDResp) {
                 mAdapter = new NewsListAdapter(getActivity(), newsDResp.getRows());
@@ -107,11 +113,11 @@ public class VFragment extends BaseFragment implements XListView.IXListViewListe
             v.setLayoutParams(params);
             if (i == is) {
                 tv.setBackgroundResource(R.drawable.r_shape);
-                tv.setTextColor(0xff00bbf5);
+                tv.setTextColor(0xff545eee);
             }
             int finalI = i;
             v.setOnClickListener(vvvv  -> {
-                onItemClick(v, finalI);
+                onItemClick(vvvv, finalI);
             });
             mLlBtnGrp.addView(v);
         }
@@ -143,12 +149,10 @@ public class VFragment extends BaseFragment implements XListView.IXListViewListe
             }
         });
         if (!isScrolling) {
-            if (index > 5) {
-                index = 5;
-            } else if (index < 2) {
+            if (index < 2) {
                 index = 2;
             }
-            if (mNList.getRows().size() > 5) {
+            if (mNList.getRows().size() >= 5) {
                 mScrollView.smoothScrollTo((index - 2) * itemWidth, 40);
             }
         }
@@ -187,7 +191,11 @@ public class VFragment extends BaseFragment implements XListView.IXListViewListe
             @Override
             public void Success(NewsDResp newsDResp) {
                 freshList(newsDResp, true);
-                mXl.stopRefresh();
+                mXl.stopLoadMore();
+                if (newsDResp.getRows() == null || newsDResp.getRows().isEmpty()) {
+                    page --;
+                    ZToast.r(getActivity(), "没有更多数据了");
+                }
             }
             @Override
             public void Failed(String msg) {

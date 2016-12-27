@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -11,28 +12,31 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:background="#545EEE"
                 android:gravity="center"
-                android:background="#545EEE">
+                android:orientation="vertical">
+
                 <com.youzi.fastnews.utils.CircleImageView
                     android:id="@+id/img_head"
                     android:layout_width="75dp"
                     android:layout_height="75dp"
-                    android:src="@drawable/i_d_head"
-                    android:layout_marginTop="25dp"/>
+                    android:layout_marginTop="25dp"
+                    android:src="@drawable/i_d_head"/>
 
                 <TextView
                     android:id="@+id/per_login_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:textColor="#ffffff"
                     android:layout_marginTop="10dp"
-                    android:text="微信登陆"/>
+                    android:text="微信登陆"
+                    android:textColor="#ffffff"
+                    android:textSize="15dp"/>
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -43,201 +47,252 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp">
+
                 <TextView
                     android:id="@+id/tv_money"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:textColor="#464646"
                     android:layout_centerInParent="true"
-                    android:text="00.00"/>
+                    android:text="00.00"
+                    android:textColor="#464646"
+                    android:textSize="22dp"/>
 
                 <TextView
-                    android:textColor="#464646"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15dp"
-                    android:layout_toRightOf="@+id/tv_money"
                     android:layout_alignParentBottom="true"
-                    android:text="元"/>
+                    android:layout_toRightOf="@+id/tv_money"
+                    android:text="元"
+                    android:textColor="#464646"
+                    android:textSize="13dp"/>
             </RelativeLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:layout_marginTop="10dp"
-                android:textColor="#989898"
                 android:layout_gravity="center_horizontal"
-                android:text="我的余额"/>
+                android:layout_marginTop="10dp"
+                android:text="我的余额"
+                android:textColor="#7A7A7A"
+                android:textSize="13dp"/>
 
             <Button
                 android:id="@+id/btn_get_money"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
-                android:textSize="18dp"
                 android:background="@drawable/blue_btn_sel"
-                android:textColor="#ffffff"
-                android:text="申请提现"
                 android:padding="10dp"
-                android:layout_gravity="center_horizontal"/>
+                android:text="申请提现"
+                android:textColor="#ffffff"
+                android:textSize="18dp"/>
 
-            <TextView
-                android:id="@+id/apply_during_tv"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:layout_marginTop="10dp"
                 android:layout_gravity="center_horizontal"
-                android:textColor="#0000ff"
-                android:text="您有100元正在提现中"/>
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/img_rd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/i_blue_rd"
+                    android:layout_marginRight="10dp"/>
+
+                <TextView
+                    android:id="@+id/apply_during_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="您有100元正在提现中"
+                    android:textColor="#4A7DFF"
+                    android:textSize="12dp"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="10dp"
+                android:background="#e8e8e8"/>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:layout_marginTop="10dp"
-                android:background="#cccccc"/>
+                android:background="#F4F5F6"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#e8e8e8"/>
+
             <LinearLayout
                 android:id="@+id/ll_invite"
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
+
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center_vertical"
-                    android:background="@drawable/i_inv_p"
-                    android:layout_marginLeft="20dp"/>
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/i_inv_p"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
+                    android:text="邀请好友"
                     android:textColor="#464646"
-                    android:text="邀请好友"/>
+                    android:textSize="13dp"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="center_vertical">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="20dp"/>
+                        android:layout_marginRight="10dp"
+                        android:padding="10dp"
+                        android:src="@drawable/i_right_arr"/>
                 </RelativeLayout>
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="#cccccc"/>
+                android:background="#e8e8e8"/>
 
             <LinearLayout
                 android:id="@+id/ll_invite_r"
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
+
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center_vertical"
-                    android:background="@drawable/i_inv_r"
-                    android:layout_marginLeft="20dp"/>
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/i_inv_r"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
+                    android:text="邀请排行榜"
                     android:textColor="#464646"
-                    android:text="邀请排行榜"/>
+                    android:textSize="13dp"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="center_vertical">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="20dp"/>
+                        android:layout_marginRight="10dp"
+                        android:padding="10dp"
+                        android:src="@drawable/i_right_arr"/>
                 </RelativeLayout>
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="#cccccc"/>
+                android:background="#e8e8e8"
+                android:visibility="gone"/>
 
             <LinearLayout
                 android:id="@+id/ll_sh"
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
+
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center_vertical"
-                    android:background="@drawable/i_sh_p"
-                    android:layout_marginLeft="20dp"/>
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/i_sh_p"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
+                    android:text="分享文章"
                     android:textColor="#464646"
-                    android:text="分享文章"/>
+                    android:textSize="13dp"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="center_vertical">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="20dp"/>
+                        android:layout_marginRight="10dp"
+                        android:padding="10dp"
+                        android:src="@drawable/i_right_arr"/>
                 </RelativeLayout>
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="#cccccc"/>
+                android:background="#e8e8e8"/>
+
             <LinearLayout
                 android:id="@+id/ll_sh_r"
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
+
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center_vertical"
-                    android:background="@drawable/i_sh_r"
-                    android:layout_marginLeft="20dp"/>
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/i_sh_r"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
+                    android:text="分享排行榜"
                     android:textColor="#464646"
-                    android:text="分享排行榜"/>
+                    android:textSize="13dp"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="center_vertical">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="20dp"/>
+                        android:layout_marginRight="10dp"
+                        android:padding="10dp"
+                        android:src="@drawable/i_right_arr"/>
                 </RelativeLayout>
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="#cccccc"/>
+                android:background="#e8e8e8"
+                android:visibility="gone"/>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

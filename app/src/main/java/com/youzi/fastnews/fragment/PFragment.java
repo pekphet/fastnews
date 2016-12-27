@@ -41,6 +41,7 @@ public class PFragment extends BaseFragment {
 
     private float txShh = 0.0f;
     private TextView mTvMoney;
+    private ImageView mImgRd;
 
     @Override
     protected View initView(LayoutInflater inflater) {
@@ -52,8 +53,9 @@ public class PFragment extends BaseFragment {
         btn_get_money = (Button) v.findViewById(R.id.btn_get_money);
         apply_during_tv = (TextView) v.findViewById(R.id.apply_during_tv);
         per_login_tv = (TextView) v.findViewById(R.id.per_login_tv);
-        mTvMoney = (TextView) v.findViewById(R.id.tv_money);
-        mImgH = (ImageView) v.findViewById(R.id.img_head);
+        mTvMoney    = (TextView) v.findViewById(R.id.tv_money);
+        mImgH       = (ImageView) v.findViewById(R.id.img_head);
+        mImgRd      = (ImageView) v.findViewById(R.id.img_rd);
 
         mLlInviteR.setVisibility(View.GONE);
         mLlShareR.setVisibility(View.GONE);
@@ -76,6 +78,7 @@ public class PFragment extends BaseFragment {
 
     private void flushTXL() {
         apply_during_tv.setVisibility(View.VISIBLE);
+        mImgRd.setVisibility(View.VISIBLE);
         if (txShh != 0.0f) {
             if (txShh == -1.0f) {
                 apply_during_tv.setText("恭喜您, 您的提现审核已通过");
@@ -87,6 +90,7 @@ public class PFragment extends BaseFragment {
 
         } else {
             apply_during_tv.setVisibility(View.GONE);
+            mImgRd.setVisibility(View.GONE);
         }
     }
 

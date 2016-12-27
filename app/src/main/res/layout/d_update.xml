@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="207dp"
+        android:layout_height="375dp"
+        android:background="@drawable/version_update">
+
+
+        <ImageView
+            android:id="@+id/update_cancle_btn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true" />
+
+        <ImageView
+            android:id="@+id/update_background_iamge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/version_update"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/update_cancle_btn"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="90dp" />
+
+        <Button
+            android:id="@+id/update_determine_btn"
+            android:layout_width="127dp"
+            android:layout_height="30dp"
+            android:layout_above="@+id/skip_cancle_tv"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="300dp"
+            android:background="@drawable/update_button"
+            android:text="立即更新"
+            android:textColor="@color/white"
+            android:textSize="@dimen/eighth_text_size" />
+
+        <TextView
+            android:id="@+id/skip_cancle_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"
+            android:text=">> 跳过"
+            android:textColor="@color/button_blue_color"
+            android:textSize="@dimen/ninth_text_size" />
+
+    </RelativeLayout>
+
+</LinearLayout>

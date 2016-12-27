@@ -13,6 +13,7 @@ public class NewsListE {
     private int     order_num;
     private String  create_time;
     private String  parent_name;
+    private String  link;
 
     public int getId() {
         return id;
@@ -85,5 +86,13 @@ public class NewsListE {
 
     public void setParent_name(String parent_name) {
         this.parent_name = parent_name;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 }

@@ -6,10 +6,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.youzi.fastnews.App;
 import com.youzi.fastnews.R;
+import com.youzi.fastnews.entity.UpdateResp;
 import com.youzi.fastnews.fragment.NFragment;
 import com.youzi.fastnews.fragment.PFragment;
 import com.youzi.fastnews.fragment.VFragment;
+import com.youzi.fastnews.net.INetCallback;
+import com.youzi.fastnews.update.UpdateDialogUtils;
+import com.youzi.fastnews.utils.ZToast;
 
 import cc.fish.coreui.BaseFragment;
 import cc.fish.coreui.BaseFragmentActivity;
@@ -35,7 +40,17 @@ public class HomeActivity extends BaseFragmentActivity {
     }
 
     private void checkUpdate() {
+        App.getNetManager().update(new INetCallback<UpdateResp>() {
+            @Override
+            public void Success(UpdateResp updateResp) {
+                UpdateDialogUtils.showDialog(HomeActivity.this, updateResp);
+            }
 
+            @Override
+            public void Failed(String msg) {
+                ZToast.d(HomeActivity.this, msg);
+            }
+        });
     }
 
     @Override

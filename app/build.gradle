@@ -18,9 +18,87 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+        defaultConfig {
+            manifestPlaceholders = [CHANNEL_VALUE: "default_channel"]
+        }
+        wandoujia {
+            manifestPlaceholders = [CHANNEL_VALUE: "wandoujia"]
+        }
+        _360 {
+            manifestPlaceholders = [CHANNEL_VALUE: "360"]
+        }
+        baidu {
+            manifestPlaceholders = [CHANNEL_VALUE: "baidu"]
+        }
+
+        anzhuo {
+            manifestPlaceholders = [CHANNEL_VALUE: "anzhuo"]
+        }
+        _91 {
+            manifestPlaceholders = [CHANNEL_VALUE: "91"]
+        }
+        xiaomi {
+            manifestPlaceholders = [CHANNEL_VALUE: "xiaomi"]
+        }
+        oppo {
+            manifestPlaceholders = [CHANNEL_VALUE: "oppo"]
+        }
+        huawei {
+            manifestPlaceholders = [CHANNEL_VALUE: "huawei"]
+        }
+        anzhi {
+            manifestPlaceholders = [CHANNEL_VALUE: "anzhi"]
+        }
+        lenovo {
+            manifestPlaceholders = [CHANNEL_VALUE: "lenovo"]
+        }
+        meizu {
+            manifestPlaceholders = [CHANNEL_VALUE: "meizu"]
+        }
+        jifeng {
+            manifestPlaceholders = [CHANNEL_VALUE: "jifeng"]
+        }
+        sougou {
+            manifestPlaceholders = [CHANNEL_VALUE: "sougou"]
+        }
+        pp {
+            manifestPlaceholders = [CHANNEL_VALUE: "pp"]
+        }
+        sanxing {
+            manifestPlaceholders = [CHANNEL_VALUE: "sanxing"]
+        }
+        tecent {
+            manifestPlaceholders = [CHANNEL_VALUE: "tecent"]
+        }
+        adxiaozi {
+            manifestPlaceholders = [CHANNEL_VALUE: "adxiaozi"]
+        }
+        vivo {
+            manifestPlaceholders = [CHANNEL_VALUE: "vivo"]
+        }
+        shichang02 {
+            manifestPlaceholders = [CHANNEL_VALUE: "shichang02"]
+        }
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    signingConfigs {
+
+        release {
+            //TODO change key store file
+            storeFile file (RELEASE_XZ_STORE_FILE)
+
+            storePassword RELEASE_XZ_STORE_PASSWORD
+
+            keyAlias RELEASE_XZ_KEY_ALIAS
+
+            keyPassword RELEASE_XZ_KEY_PASSWORD
+
+        }
+
     }
 }
 

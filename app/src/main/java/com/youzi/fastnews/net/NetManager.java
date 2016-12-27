@@ -22,9 +22,12 @@ import com.youzi.fastnews.entity.ShareRuleResp;
 import com.youzi.fastnews.entity.ShareRuleRespD;
 import com.youzi.fastnews.entity.TXListResp;
 import com.youzi.fastnews.entity.TXListResponseD;
+import com.youzi.fastnews.entity.UpdateResp;
+import com.youzi.fastnews.entity.UpdateRespD;
 import com.youzi.fastnews.entity.YUEResp;
 import com.youzi.fastnews.entity.YUERespD;
 import com.youzi.fastnews.global.WechatConstants;
+import com.youzi.fastnews.update.AppUtils;
 import com.youzi.fastnews.utils.DeviceUtils;
 import com.youzi.fastnews.utils.ZToast;
 
@@ -303,6 +306,25 @@ public class NetManager implements Constants {
                         callback.Failed(((InviteRespD)result).getMsg());
                     } else {
                         callback.Success(((InviteRespD)result).getData());
+                    }
+                }).Failed(msg -> callback.Failed((String) msg)).get(mContext, mHandler);
+    }
+
+    public void transUrl(String url, INetCallback callback) {
+
+    }
+
+    public void update(INetCallback<UpdateResp> callback) {
+        new RequestHelper<UpdateRespD>().Url(MAIN_URL + "/api/app/check_update")
+                .Method(RequestHelper.Method.GET).Result(UpdateRespD.class)
+                .UrlParam("channel",        AppUtils.getMetaChannel(mContext), true)
+                .UrlParam("version_code",   AppUtils.getVersionCode(mContext) + "")
+                .Success(result -> {
+                    if (((UpdateRespD)result).getCode() != 0) {
+                        callback.Failed(((UpdateRespD)result).getMsg());
+                    } else if (((UpdateRespD)result).getData().getIs_update() == 1){
+                        callback.Success(((UpdateRespD)result).getData());
+                    } else {
                     }
                 }).Failed(msg -> callback.Failed((String) msg)).get(mContext, mHandler);
     }

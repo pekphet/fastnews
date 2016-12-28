@@ -7,6 +7,8 @@ import android.os.Looper;
 import com.youzi.fastnews.App;
 import com.youzi.fastnews.Constants;
 import com.youzi.fastnews.entity.BaseResp;
+import com.youzi.fastnews.entity.InvRankResp;
+import com.youzi.fastnews.entity.InvRankRespD;
 import com.youzi.fastnews.entity.InviteResp;
 import com.youzi.fastnews.entity.InviteRespD;
 import com.youzi.fastnews.entity.LoginE;
@@ -19,6 +21,8 @@ import com.youzi.fastnews.entity.RegisterResponseEntity;
 import com.youzi.fastnews.entity.ResponseWechatLoginEntity;
 import com.youzi.fastnews.entity.ResponseWechatUserInfoEntity;
 import com.youzi.fastnews.entity.SResp;
+import com.youzi.fastnews.entity.ShareRankE;
+import com.youzi.fastnews.entity.ShareRankRespD;
 import com.youzi.fastnews.entity.ShareRuleResp;
 import com.youzi.fastnews.entity.ShareRuleRespD;
 import com.youzi.fastnews.entity.TXListResp;
@@ -31,6 +35,8 @@ import com.youzi.fastnews.global.WechatConstants;
 import com.youzi.fastnews.update.AppUtils;
 import com.youzi.fastnews.utils.DeviceUtils;
 import com.youzi.fastnews.utils.ZToast;
+
+import java.util.List;
 
 import cc.fish.fishhttp.net.RequestHelper;
 
@@ -342,5 +348,41 @@ public class NetManager implements Constants {
                     } else {
                     }
                 }).Failed(msg -> callback.Failed((String) msg)).get(mContext, mHandler);
+    }
+
+    /*
+    http://www.yz064.com/api/userinfo/share_rank?logged_token=63180812cfbb04a3de5aab352ceab3c4
+     */
+    public void asyncShareRank(INetCallback<List<ShareRankE>> callback) {
+        new RequestHelper<ShareRankRespD>().Method(RequestHelper.Method.GET)
+                .Result(ShareRankRespD.class).Url(MAIN_URL + "/api/userinfo/share_rank")
+                .UrlParam("logged_token", App.getToken(), true)
+                .Success(result -> {
+                    if (((ShareRankRespD)result).getCode() != 0) {
+                        callback.Failed(((ShareRankRespD)result).getMsg());
+                    } else {
+                        callback.Success(((ShareRankRespD)result).getData());
+                    }
+                })
+                .Failed(msg -> callback.Failed((String) msg))
+                .get(mContext, mHandler);
+    }
+
+    /*
+    http://www.yz064.com/api/userinfo/invite_rank?logged_token=63180812cfbb04a3de5aab352ceab3c4
+     */
+    public void asyncInvRank(INetCallback<InvRankResp> callback) {
+        new RequestHelper<InvRankRespD>().Method(RequestHelper.Method.GET)
+                .Result(InvRankRespD.class).Url(MAIN_URL + "/api/userinfo/invite_rank")
+                .UrlParam("logged_token", App.getToken(), true)
+                .Success(result -> {
+                    if (((InvRankRespD)result).getCode() != 0) {
+                        callback.Failed(((InvRankRespD)result).getMsg());
+                    } else {
+                        callback.Success(((InvRankRespD)result).getData());
+                    }
+                })
+                .Failed(msg -> callback.Failed((String) msg))
+                .get(mContext, mHandler);
     }
 }

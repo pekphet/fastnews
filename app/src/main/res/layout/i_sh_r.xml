@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center_vertical"
+              android:orientation="horizontal">
+    <RelativeLayout
+        android:layout_width="60dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="30dp">
+        <TextView
+            android:id="@+id/tv_sh_r_id"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:textSize="13dp"
+            android:textColor="#989898"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+    <com.youzi.fastnews.utils.CircleImageView
+        android:id="@+id/img_sh_r_hd"
+        android:layout_marginLeft="20dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"/>
+    <TextView
+        android:id="@+id/tv_sh_r_nm"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:maxLines="1"
+        android:layout_height="wrap_content"
+        android:textSize="13dp"
+        android:textColor="#989898"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_sh_r_c"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="30dp"
+        android:textStyle="bold"
+        android:gravity="right"
+        android:textColor="#989898"
+        android:textSize="15dp"/>
+
+</LinearLayout>

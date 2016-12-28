@@ -13,6 +13,7 @@ import com.youzi.fastnews.App;
 import com.youzi.fastnews.R;
 import com.youzi.fastnews.activity.ApplyWithdrawalsActivity;
 import com.youzi.fastnews.activity.ApplyWithdrawalsDetailsActivity;
+import com.youzi.fastnews.activity.HomeActivity;
 import com.youzi.fastnews.activity.InviteFriendsActivity;
 import com.youzi.fastnews.activity.InviteRankActivity;
 import com.youzi.fastnews.activity.ShareActivity;
@@ -56,9 +57,6 @@ public class PFragment extends BaseFragment {
         mTvMoney    = (TextView) v.findViewById(R.id.tv_money);
         mImgH       = (ImageView) v.findViewById(R.id.img_head);
         mImgRd      = (ImageView) v.findViewById(R.id.img_rd);
-
-        mLlInviteR.setVisibility(View.GONE);
-        mLlShareR.setVisibility(View.GONE);
 
         mLlInvite.setOnClickListener(this);
         mLlInviteR.setOnClickListener(this);
@@ -164,6 +162,9 @@ public class PFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
+        if (!App.isLogIn()) {
+            HomeActivity.sel(0);
+        }
         mTvMoney.setText(App.sYUE + "");
     }
 }

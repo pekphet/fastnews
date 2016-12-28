@@ -56,7 +56,6 @@ public class ShareWebView extends Activity {
             mBtnFr.setText("转发到朋友圈");
             mBtnFr.setOnClickListener(v->sent2FR());
         } else {
-            mBtnFr.setText("微信登录后可以转发");
             mBtnFr.setOnClickListener(v->ImmediatelyLoginActivity.doLogin(this));
         }
     }

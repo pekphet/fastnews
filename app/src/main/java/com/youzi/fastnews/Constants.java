@@ -5,7 +5,7 @@ package com.youzi.fastnews;
  */
 
 public interface Constants {
-    boolean DEBUG               = false;
+    boolean DEBUG               = true;
 
     String MAIN_URL             = DEBUG ? "http://www.yz064.com" : "http://www.yz064.com";
 

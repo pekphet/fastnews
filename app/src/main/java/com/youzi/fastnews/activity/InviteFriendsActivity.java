@@ -61,8 +61,8 @@ public class InviteFriendsActivity extends Activity implements View.OnClickListe
     private boolean isPaused;
     private ImageView in;
     private String shareUrl;
-    private String shareTitle;
-    private String shareContent;
+    private String shareTitle = "火速新闻";
+    private String shareContent = "浏览新闻也能赚钱!";
     private TextView mTvIRule;
 
     @Override
@@ -179,7 +179,7 @@ public class InviteFriendsActivity extends Activity implements View.OnClickListe
                     return;
                 }
 
-                PopWindowDisplayUtil.showSharePopWindow(InviteFriendsActivity.this, "邀请好友", shareUrl, shareTitle, shareContent, v);
+                PopWindowDisplayUtil.showSharePopWindow(InviteFriendsActivity.this, "邀请好友", inviteFriendsUrl.getText().toString(), shareTitle, shareContent, v);
 //                WechatUtils.wechatShare(InviteFriendsActivity.this, App.iWXAPI, WechatConstants.WXSceneTimeline, shareUrl, shareTitle, shareContent);
 
                 break;

@@ -137,4 +137,8 @@ public class App extends Application {
         return sp.getString("head", "");
     }
 
+    public static boolean isLogIn() {
+        return getToken() != null;
+    }
+
 }

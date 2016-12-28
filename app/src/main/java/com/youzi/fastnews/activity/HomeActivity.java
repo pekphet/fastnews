@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
 import com.youzi.fastnews.App;
 import com.youzi.fastnews.R;
 import com.youzi.fastnews.entity.UpdateResp;
@@ -101,5 +102,18 @@ public class HomeActivity extends BaseFragmentActivity {
             return;
         }
         self.setTabSel(self.getBottomLayout().getChildAt(index), index);
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

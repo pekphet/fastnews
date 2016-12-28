@@ -155,7 +155,7 @@ public class NetManager implements Constants {
         new RequestHelper<ResponseWechatLoginEntity>().Method(RequestHelper.Method.POST)
                 .Url(MAIN_URL + "/api/user/wechat_login")
                 .Result(RegisterResponseEntity.class)
-                .PostParam(REQUEST_PARAM_REGISTER_ACCESS_TOKEN, accessToken)
+                .PostParam(REQUEST_PARAM_REGISTER_ACCESS_TOKEN, accessToken, true)
                 .PostParam(REQUEST_PARAM_REGISTER_OPENID, openId)
                 .PostParam(REQUEST_PARAM_REGISTER_UNIONID, unionId)
                 .PostParam(REQUEST_PARAM_REGISTER_UNIQUID, DeviceUtils.getIMEI(mContext))

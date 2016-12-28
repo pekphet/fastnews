@@ -10,6 +10,7 @@ import android.webkit.WebViewClient;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
 import com.youzi.fastnews.App;
 import com.youzi.fastnews.R;
 import com.youzi.fastnews.global.WechatConstants;
@@ -84,5 +85,18 @@ public class ShareWebView extends Activity {
         i.putExtra("S-FID", fid);
 
         c.startActivity(i);
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

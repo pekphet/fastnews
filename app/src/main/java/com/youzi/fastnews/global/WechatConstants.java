@@ -30,7 +30,7 @@ public class WechatConstants {
     final public static String REQUEST_PARAM_REGISTER_NICKNAME = "nickname";
     final public static String REQUEST_PARAM_REGISTER_AVATAR = "avatar";
     final public static String REQUEST_PARAM_REGISTER_SEX = "sex";
-    final public static String REQUEST_HEADIMAGE_URL = "headimgurl ";
+    final public static String REQUEST_HEADIMAGE_URL = "headimgurl";
     final public static String REQUEST_PARENT_ID = "parent_id";
 
 

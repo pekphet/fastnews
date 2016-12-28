@@ -56,7 +56,11 @@ public class HomeActivity extends BaseFragmentActivity {
 
     @Override
     protected void onItemClick(View item, int index) {
-
+        if (index == 2) {
+            if (!App.isLogIn()) {
+                ImmediatelyLoginActivity.doLogin(HomeActivity.this);
+            }
+        }
     }
 
     @Override

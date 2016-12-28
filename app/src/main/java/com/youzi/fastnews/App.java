@@ -138,7 +138,7 @@ public class App extends Application {
     }
 
     public static boolean isLogIn() {
-        return getToken() != null;
+        return !getToken().equals("");
     }
 
 }

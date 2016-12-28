@@ -47,8 +47,18 @@ public class ShareWebView extends Activity {
         mWb.loadUrl(getIntent().getStringExtra("URL"));
         mBtn.setOnClickListener(v->startActivity(new Intent(this, ShareActivity.class)));
         mBtnRt.setOnClickListener(v->finish());
-        mBtnFr.setOnClickListener(v->sent2FR());
+        checkLogin();
 
+    }
+
+    private void checkLogin() {
+        if (App.isLogIn()) {
+            mBtnFr.setText("转发到朋友圈");
+            mBtnFr.setOnClickListener(v->sent2FR());
+        } else {
+            mBtnFr.setText("微信登录后可以转发");
+            mBtnFr.setOnClickListener(v->ImmediatelyLoginActivity.doLogin(this));
+        }
     }
 
     private void sent2FR() {
@@ -91,6 +101,7 @@ public class ShareWebView extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        checkLogin();
         MobclickAgent.onResume(this);
     }
 

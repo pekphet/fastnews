@@ -2,6 +2,7 @@ package com.youzi.fastnews.activity;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -42,5 +43,10 @@ public class ImmediatelyLoginActivity extends Activity {
     public static void loginSucc() {
         self.startActivity(new Intent(self, HomeActivity.class));
         self.finish();
+    }
+
+    public static void doLogin(Context context) {
+        Intent intent = new Intent(context, ImmediatelyLoginActivity.class);
+        context.startActivity(intent);
     }
 }

@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.youzi.fastnews.App;
 import com.youzi.fastnews.R;
-import com.youzi.fastnews.entity.BaseResp;
+import com.youzi.fastnews.entity.FeedResp;
 import com.youzi.fastnews.global.WechatConstants;
 import com.youzi.fastnews.net.INetCallback;
 import com.youzi.fastnews.utils.WechatUtils;
@@ -45,6 +45,9 @@ public class ShareWebView2 extends Activity {
         initWebView();
         mCat1 = getIntent().getIntExtra("CATEGORY1", -1);
         mCat2 = getIntent().getIntExtra("CATEGORY2", -1);
+        if (mCat1 == 2) {
+            mCat2 = 0;
+        }
 
         mWb.loadUrl(getIntent().getStringExtra("URL"));
         mBtn.setOnClickListener(v->startActivity(new Intent(this, ShareActivity.class)));
@@ -57,11 +60,14 @@ public class ShareWebView2 extends Activity {
     private void loadShareUrl() {
         mBtnFr.setText("正在获取分享连接");
         mBtnFr.setEnabled(false);
-        App.getNetManager().transUrl(getIntent().getStringExtra("URL"), mCat1, mCat2, new INetCallback<BaseResp>() {
+        App.getNetManager().transUrl(getIntent().getStringExtra("URL"), mCat1, mCat2, new INetCallback<FeedResp>() {
             @Override
-            public void Success(BaseResp baseResp) {
+            public void Success(FeedResp f) {
                 mBtnFr.setEnabled(true);
                 mBtnFr.setText("转发到朋友圈");
+                sUrl = f.getShare_link().replace("{logged_token}", App.getToken());
+                sCon = f.getShare_title();
+                sDes = f.getShare_description();
             }
 
             @Override
@@ -74,7 +80,7 @@ public class ShareWebView2 extends Activity {
 
     private void sent2FR() {
         //PopWindowDisplayUtil.showSharePopWindow(this, "分享", sUrl, sCon, sDes, mBtnFr);
-        WechatUtils.wechatShare(this, App.iWXAPI, WechatConstants.WXSceneTimeline, sUrl.replace("{logged_token}", App.getToken()), sCon, sDes);
+        WechatUtils.wechatShare(this, App.iWXAPI, WechatConstants.WXSceneTimeline, sUrl, sCon, sDes);
     }
 
     private void initWebView() {

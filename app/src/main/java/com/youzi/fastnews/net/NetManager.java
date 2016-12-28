@@ -6,7 +6,8 @@ import android.os.Looper;
 
 import com.youzi.fastnews.App;
 import com.youzi.fastnews.Constants;
-import com.youzi.fastnews.entity.BaseResp;
+import com.youzi.fastnews.entity.FeedResp;
+import com.youzi.fastnews.entity.FeedRespD;
 import com.youzi.fastnews.entity.InvRankResp;
 import com.youzi.fastnews.entity.InvRankRespD;
 import com.youzi.fastnews.entity.InviteResp;
@@ -317,18 +318,18 @@ public class NetManager implements Constants {
                 }).Failed(msg -> callback.Failed((String) msg)).get(mContext, mHandler);
     }
 
-    public void transUrl(String url, int cat1, int cat2, INetCallback<BaseResp> callback) {
-        new RequestHelper<BaseResp>().Url(MAIN_URL + "/api/feeds/add_feed")
+    public void transUrl(String url, int cat1, int cat2, INetCallback<FeedResp> callback) {
+        new RequestHelper<FeedRespD>().Url(MAIN_URL + "/api/feeds/add_feed")
                 .Method(RequestHelper.Method.POST)
-                .Result(BaseResp.class)
+                .Result(FeedRespD.class)
                 .PostParam("category_id",    cat1+ "", true)
                 .PostParam("category_id2",   cat2+ "")
                 .PostParam("link",           url)
                 .Success(result -> {
-                    if (((BaseResp)result).getCode() != 0) {
-                        callback.Failed(((BaseResp)result).getMsg());
+                    if (((FeedRespD)result).getCode() != 0) {
+                        callback.Failed(((FeedRespD)result).getMsg());
                     } else {
-                        callback.Success((BaseResp)result);
+                        callback.Success(((FeedRespD)result).getData());
                     }
                 }).Failed(msg -> callback.Failed((String) msg))
                 .post(mContext, mHandler);

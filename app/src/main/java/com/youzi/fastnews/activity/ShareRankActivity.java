@@ -107,7 +107,7 @@ public class ShareRankActivity extends Activity {
                 ImageLoader.getInstance().displayImage(sre.getAvatar(), cimHd);
             }
             tvNm.setText(sre.getUser_name());
-            tvCnt.setText(sre.getShare_count());
+            tvCnt.setText(sre.getShare_count() + "");
             if (position <= 2) {
                 tvR.setText("");
                 tvR.setBackgroundResource(RANK_ICON_SRCS[position]);

@@ -19,11 +19,13 @@ import com.youzi.fastnews.view.HomeWebView;
 
 import cc.fish.coreui.BaseFragment;
 
+import static com.youzi.fastnews.fragment.N2Fragment.gCategory2;
+
 /**
  * Created by fish on 16-12-27.
  */
 
-public class N2Fragment extends BaseFragment {
+public class V2Fragment extends BaseFragment {
     private static final int PIECES = 5;
     private HorizontalScrollView mScrollView;
     private LinearLayout mLlBtnGrp;
@@ -33,8 +35,6 @@ public class N2Fragment extends BaseFragment {
     public NewsListAdapter mAdapter = null;
     private HomeWebView mWbH;
     private int ccl = 0;
-    public static int gCategory1 = 1;
-    public static int gCategory2 = 0;
 
 
     @Nullable
@@ -46,7 +46,7 @@ public class N2Fragment extends BaseFragment {
 
     private void initOnce() {
         params = new LinearLayout.LayoutParams(getItemWidth(PIECES), LinearLayout.LayoutParams.MATCH_PARENT);
-        App.getNetManager().loadNewsList(1, new INetCallback<NewsListResp>() {
+        App.getNetManager().loadNewsList(2, new INetCallback<NewsListResp>() {
             @Override
             public void Success(NewsListResp newsListResp) {
                 mNList = newsListResp;
@@ -65,6 +65,7 @@ public class N2Fragment extends BaseFragment {
     protected View initView(LayoutInflater inflater) {
         View v = inflater.inflate(R.layout.n2_f, null);
         mScrollView = (HorizontalScrollView) v.findViewById(R.id.scroll);
+        mScrollView.setVisibility(View.GONE);
         mLlBtnGrp = (LinearLayout) v.findViewById(R.id.ll_btns);
         mWbH = (HomeWebView) v.findViewById(R.id.wb_home);
         initWebView();
@@ -77,7 +78,7 @@ public class N2Fragment extends BaseFragment {
 
     @Override
     protected void initData() {
-        gCategory1 = 1;
+        N2Fragment.gCategory1 = 2;
     }
 
     private void flushUI() {

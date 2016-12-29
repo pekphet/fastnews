@@ -3,6 +3,7 @@ package com.youzi.fastnews.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +45,7 @@ public class InviteRankActivity extends Activity{
         mTvRule = (TextView) findViewById(R.id.tv_inv_r_rl);
         mBtnBtm = (TextView) findViewById(R.id.btn_inv_b);
         mLv.setAdapter(mAdapter);
+        mLv.setSelector(new ColorDrawable());
         findViewById(R.id.btn_ret).setOnClickListener(bv->finish());
         mBtnBtm.setOnClickListener(bv->toInvAct());
         initData();

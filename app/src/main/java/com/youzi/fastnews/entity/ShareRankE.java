@@ -14,6 +14,7 @@ package com.youzi.fastnews.entity;
 public class ShareRankE {
     private int     user_id;
     private int     share_count;
+    private int     share_point;
     private String  user_name;
     private String  avatar;
 
@@ -47,5 +48,13 @@ public class ShareRankE {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public int getShare_point() {
+        return share_point;
+    }
+
+    public void setShare_point(int share_point) {
+        this.share_point = share_point;
     }
 }

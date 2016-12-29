@@ -3,6 +3,7 @@ package com.youzi.fastnews.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +41,7 @@ public class ShareRankActivity extends Activity {
         mTvBtm = (TextView) findViewById(R.id.btn_sh_b);
         mLv = (ListView) findViewById(R.id.lv_sh_r);
         mLv.setAdapter(mAdapter);
-
+        mLv.setSelector(new ColorDrawable());
         tvHead.setText("分享排行榜");
         findViewById(R.id.btn_ret).setOnClickListener(bv->finish());
         mTvBtm.setOnClickListener(bv->toInvAct());
@@ -107,7 +108,7 @@ public class ShareRankActivity extends Activity {
                 ImageLoader.getInstance().displayImage(sre.getAvatar(), cimHd);
             }
             tvNm.setText(sre.getUser_name());
-            tvCnt.setText(sre.getShare_count() + "");
+            tvCnt.setText(String.format("%.2f", sre.getShare_point() / 100f));
             if (position <= 2) {
                 tvR.setText("");
                 tvR.setBackgroundResource(RANK_ICON_SRCS[position]);

@@ -12,7 +12,6 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youzi.fastnews.App;
 import com.youzi.fastnews.R;
 import com.youzi.fastnews.activity.ApplyWithdrawalsActivity;
-import com.youzi.fastnews.activity.ApplyWithdrawalsDetailsActivity;
 import com.youzi.fastnews.activity.HomeActivity;
 import com.youzi.fastnews.activity.InviteFriendsActivity;
 import com.youzi.fastnews.activity.InviteRankActivity;
@@ -149,7 +148,7 @@ public class PFragment extends BaseFragment {
                 startActivity(new Intent(getActivity(), ApplyWithdrawalsActivity.class));
                 break;
             case R.id.apply_during_tv:
-                startActivity(new Intent(getActivity(), ApplyWithdrawalsDetailsActivity.class));
+//                startActivity(new Intent(getActivity(), ApplyWithdrawalsDetailsActivity.class));
                 break;
             case R.id.per_login_tv:
                 WechatUtils.wechatLogin(App.iWXAPI);

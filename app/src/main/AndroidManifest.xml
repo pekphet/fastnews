@@ -28,6 +28,7 @@
         <activity
             android:name=".activity.HomeActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="adjustPan|stateHidden"
             android:screenOrientation="portrait" />
 
         <activity

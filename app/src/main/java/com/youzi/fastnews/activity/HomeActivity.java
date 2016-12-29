@@ -11,10 +11,8 @@ import com.youzi.fastnews.App;
 import com.youzi.fastnews.R;
 import com.youzi.fastnews.entity.UpdateResp;
 import com.youzi.fastnews.fragment.N2Fragment;
-import com.youzi.fastnews.fragment.NFragment;
 import com.youzi.fastnews.fragment.PFragment;
 import com.youzi.fastnews.fragment.V2Fragment;
-import com.youzi.fastnews.fragment.VFragment;
 import com.youzi.fastnews.net.INetCallback;
 import com.youzi.fastnews.update.UpdateDialogUtils;
 import com.youzi.fastnews.utils.ZToast;
@@ -28,10 +26,15 @@ import cc.fish.coreui.BaseFragmentActivity;
 
 public class HomeActivity extends BaseFragmentActivity {
 
-    private final static Class<BaseFragment>[] INCLUDE_FRAGMENTS = new Class[]{NFragment.class, VFragment.class, N2Fragment.class, V2Fragment.class, PFragment.class};
-    private final static int[]      BOTTOM_ICON_CHECKED     = {R.drawable.i_h_np, R.drawable.i_h_vp, R.drawable.i_h_np, R.drawable.i_h_vp, R.drawable.i_h_pp};
-    private final static int[]      BOTTOM_ICON_UNCHECKED   = {R.drawable.i_h_n, R.drawable.i_h_v, R.drawable.i_h_n, R.drawable.i_h_v, R.drawable.i_h_p};
-    private final static String[]   BOTTOM_TEXT_ARRAY       = {"新闻", "视频", "新闻2", "视频2", "个人"};
+//    private final static Class<BaseFragment>[] INCLUDE_FRAGMENTS = new Class[]{NFragment.class, VFragment.class, N2Fragment.class, V2Fragment.class, PFragment.class};
+//    private final static int[]      BOTTOM_ICON_CHECKED     = {R.drawable.i_h_np, R.drawable.i_h_vp, R.drawable.i_h_np, R.drawable.i_h_vp, R.drawable.i_h_pp};
+//    private final static int[]      BOTTOM_ICON_UNCHECKED   = {R.drawable.i_h_n, R.drawable.i_h_v, R.drawable.i_h_n, R.drawable.i_h_v, R.drawable.i_h_p};
+//    private final static String[]   BOTTOM_TEXT_ARRAY       = {"新闻", "视频", "新闻2", "视频2", "个人"};
+
+    private final static Class<BaseFragment>[] INCLUDE_FRAGMENTS = new Class[]{N2Fragment.class, V2Fragment.class, PFragment.class};
+    private final static int[]      BOTTOM_ICON_CHECKED     = {R.drawable.i_h_np, R.drawable.i_h_vp, R.drawable.i_h_pp};
+    private final static int[]      BOTTOM_ICON_UNCHECKED   = {R.drawable.i_h_n, R.drawable.i_h_v, R.drawable.i_h_p};
+    private final static String[]   BOTTOM_TEXT_ARRAY       = {"新闻", "视频", "个人"};
 
     private static HomeActivity self = null;
     @Override

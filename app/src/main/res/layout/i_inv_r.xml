@@ -20,8 +20,8 @@
     <com.youzi.fastnews.utils.CircleImageView
         android:id="@+id/img_inv_r_hd"
         android:layout_marginLeft="20dp"
-        android:layout_width="50dp"
-        android:layout_height="50dp"/>
+        android:layout_width="30dp"
+        android:layout_height="30dp"/>
     <TextView
         android:id="@+id/tv_inv_r_nm"
         android:layout_width="0dp"

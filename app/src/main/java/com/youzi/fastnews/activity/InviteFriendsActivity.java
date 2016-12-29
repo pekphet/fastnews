@@ -91,23 +91,23 @@ public class InviteFriendsActivity extends Activity implements View.OnClickListe
 
     public void initView() {
 
-        in = (ImageView) findViewById(R.id.in_back);
+        in          = (ImageView) findViewById(R.id.in_back);
 
-        scrollView = (ScrollView) findViewById(R.id.invite_scrollview);
+        scrollView  = (ScrollView) findViewById(R.id.invite_scrollview);
 
-        qrCode = (ImageView) findViewById(R.id.invite_friends_qrcode);
+        qrCode      = (ImageView) findViewById(R.id.invite_friends_qrcode);
 
         inviteFriendsUrl = (TextView) findViewById(R.id.invite_friends_url);
 
-        copyUrl = (Button) findViewById(R.id.copy_url);
+        copyUrl     = (Button) findViewById(R.id.copy_url);
 
-        quickShare = (Button) findViewById(R.id.quick_share);
+        quickShare  = (Button) findViewById(R.id.quick_share);
 
-        master = (TextView) findViewById(R.id.master);
+        master      = (TextView) findViewById(R.id.master);
 
         copyQrcodeTv = (TextView) findViewById(R.id.copy_invite_code_tv);
 
-        mTvIRule = (TextView) findViewById(R.id.tv_irule);
+        mTvIRule    = (TextView) findViewById(R.id.tv_irule);
 
 //        listView = (MyListView) findViewById(R.id.invite_rule_listview);
 

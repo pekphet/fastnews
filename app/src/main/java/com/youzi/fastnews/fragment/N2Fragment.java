@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.youzi.fastnews.App;
@@ -18,6 +19,7 @@ import com.youzi.fastnews.net.INetCallback;
 import com.youzi.fastnews.view.HomeWebView;
 
 import cc.fish.coreui.BaseFragment;
+import cc.fish.coreui.util.DisplayUtil;
 
 /**
  * Created by fish on 16-12-27.
@@ -50,7 +52,11 @@ public class N2Fragment extends BaseFragment {
             @Override
             public void Success(NewsListResp newsListResp) {
                 mNList = newsListResp;
-                mWbH.loadUrl(mNList.getRows().get(0).getLink());
+                if (!App.isLogIn()) {
+                    mWbH.loadUrl(mNList.getRows().get(0).getLink() + "?chk=1");
+                } else {
+                    mWbH.loadUrl(mNList.getRows().get(0).getLink());
+                }
                 gCategory2 = mNList.getRows().get(0).getId();
                 flushUI();
             }
@@ -67,8 +73,14 @@ public class N2Fragment extends BaseFragment {
         mScrollView = (HorizontalScrollView) v.findViewById(R.id.scroll);
         mLlBtnGrp = (LinearLayout) v.findViewById(R.id.ll_btns);
         mWbH = (HomeWebView) v.findViewById(R.id.wb_home);
+        initMerginView(v);
         initWebView();
         return v;
+    }
+
+    private void initMerginView(View v) {
+        View vm = v.findViewById(R.id.v_margin);
+        vm.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DisplayUtil.Dp2Px(getActivity(), 8.0f)));
     }
 
     private void initWebView() {

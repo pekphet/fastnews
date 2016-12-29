@@ -5,6 +5,7 @@ package com.youzi.fastnews.entity;
  */
 
 public class FeedResp {
+    private String  id;
     private String  share_link;
     private String  share_title;
     private String  share_description;
@@ -31,5 +32,13 @@ public class FeedResp {
 
     public void setShare_description(String share_description) {
         this.share_description = share_description;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

@@ -5,9 +5,9 @@ package com.youzi.fastnews;
  */
 
 public interface Constants {
-    boolean DEBUG               = true;
+    boolean DEBUG               = false;
 
-    String MAIN_URL             = DEBUG ? "http://www.yz064.com" : "http://www.yz064.com";
+    String MAIN_URL             = DEBUG ? "http://60.205.58.24:8084" : "http://www.yz064.com";
 
     String NEWS_LIST_URL        = MAIN_URL + "/api/category/get_list";
 

@@ -39,7 +39,7 @@ public class InviteRankActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.a_inv_r);
         TextView tvHead = (TextView) findViewById(R.id.tv_head);
-        tvHead.setText("邀请好友排行榜");
+        tvHead.setText("邀请排行榜");
         mLv = (ListView) findViewById(R.id.lv_inv_r);
         mTvRule = (TextView) findViewById(R.id.tv_inv_r_rl);
         mBtnBtm = (TextView) findViewById(R.id.btn_inv_b);
@@ -116,7 +116,7 @@ public class InviteRankActivity extends Activity{
                 tvR.setBackgroundResource(RANK_ICON_SRCS[position]);
                 tvCnt.setTextColor(RANK_ICON_CLRS[position]);
             } else {
-                tvR.setText(position + "");
+                tvR.setText(position + 1 + "");
                 tvR.setTextColor(0xff989898);
                 tvCnt.setTextColor(0xff989898);
             }

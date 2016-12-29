@@ -113,7 +113,7 @@ public class ShareRankActivity extends Activity {
                 tvR.setBackgroundResource(RANK_ICON_SRCS[position]);
                 tvCnt.setTextColor(RANK_ICON_CLRS[position]);
             } else {
-                tvR.setText(position + "");
+                tvR.setText(position + 1 + "");
                 tvR.setTextColor(0xff989898);
                 tvCnt.setTextColor(0xff989898);
             }

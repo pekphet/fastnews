@@ -57,6 +57,15 @@ public class ShareWebView2 extends Activity {
         loadShareUrl();
     }
 
+    private void checkLogin() {
+        if (App.isLogIn()) {
+            mBtnFr.setText("转发到朋友圈");
+            mBtnFr.setOnClickListener(v->sent2FR());
+        } else {
+            mBtnFr.setOnClickListener(v->ImmediatelyLoginActivity.doLogin(this));
+        }
+    }
+
     private void loadShareUrl() {
         mBtnFr.setText("正在获取分享连接");
         mBtnFr.setEnabled(false);
@@ -65,9 +74,11 @@ public class ShareWebView2 extends Activity {
             public void Success(FeedResp f) {
                 mBtnFr.setEnabled(true);
                 mBtnFr.setText("转发到朋友圈");
+                App.sCFID = f.getId();
                 sUrl = f.getShare_link().replace("{logged_token}", App.getToken());
                 sCon = f.getShare_title();
                 sDes = f.getShare_description();
+                checkLogin();
             }
 
             @Override

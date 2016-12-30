@@ -10,6 +10,7 @@ import android.webkit.WebViewClient;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.tencent.mm.sdk.constants.Build;
 import com.youzi.fastnews.App;
 import com.youzi.fastnews.R;
 import com.youzi.fastnews.entity.FeedResp;
@@ -118,5 +119,18 @@ public class ShareWebView2 extends Activity {
         i.putExtra("CATEGORY1", c1);
         i.putExtra("CATEGORY2", c2);
         c.startActivity(i);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mWb != null && android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP_MR1) {
+            mWb.loadUrl("about:blank");
+        }
     }
 }

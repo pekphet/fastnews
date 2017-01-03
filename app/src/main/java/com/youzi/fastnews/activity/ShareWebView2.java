@@ -10,7 +10,6 @@ import android.webkit.WebViewClient;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.tencent.mm.sdk.constants.Build;
 import com.youzi.fastnews.App;
 import com.youzi.fastnews.R;
 import com.youzi.fastnews.entity.FeedResp;
@@ -33,6 +32,7 @@ public class ShareWebView2 extends Activity {
     private String sDes;
     private int mCat1;
     private int mCat2;
+    private String mUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +49,8 @@ public class ShareWebView2 extends Activity {
         if (mCat1 == 2) {
             mCat2 = 0;
         }
-
-        mWb.loadUrl(getIntent().getStringExtra("URL"));
+        mUrl = getIntent().getStringExtra("URL");
+        mWb.loadUrl(mUrl);
         mBtn.setOnClickListener(v->startActivity(new Intent(this, ShareActivity.class)));
         mBtnRt.setOnClickListener(v->finish());
         mBtnFr.setOnClickListener(v->sent2FR());
@@ -61,9 +61,13 @@ public class ShareWebView2 extends Activity {
     private void checkLogin() {
         if (App.isLogIn()) {
             mBtnFr.setText("转发到朋友圈");
-            mBtnFr.setOnClickListener(v->sent2FR());
+            mBtnFr.setOnClickListener(v-> {
+                sent2FR();
+            });
         } else {
-            mBtnFr.setOnClickListener(v->ImmediatelyLoginActivity.doLogin(this));
+            mBtnFr.setOnClickListener(v-> {
+                ImmediatelyLoginActivity.doLogin(this);
+            });
         }
     }
 
@@ -124,6 +128,13 @@ public class ShareWebView2 extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
+        mWb.loadUrl("about:blank");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mWb.loadUrl(mUrl);
     }
 
     @Override

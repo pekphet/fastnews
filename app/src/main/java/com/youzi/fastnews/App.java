@@ -34,6 +34,8 @@ public class App extends Application {
     public static IWXAPI iWXAPI;
     public static String sCFID;
 
+    public static int sPacCnt = 10;
+
     public static float sYUE = 0.0f;
 
     @Override

@@ -6,6 +6,9 @@ import android.os.Looper;
 
 import com.youzi.fastnews.App;
 import com.youzi.fastnews.Constants;
+import com.youzi.fastnews.entity.ConfigRespD;
+import com.youzi.fastnews.entity.DrawResp;
+import com.youzi.fastnews.entity.DrawRespD;
 import com.youzi.fastnews.entity.FeedResp;
 import com.youzi.fastnews.entity.FeedRespD;
 import com.youzi.fastnews.entity.InvRankResp;
@@ -18,6 +21,8 @@ import com.youzi.fastnews.entity.NewsDResp;
 import com.youzi.fastnews.entity.NewsDRespD;
 import com.youzi.fastnews.entity.NewsListResp;
 import com.youzi.fastnews.entity.NewsListRespD;
+import com.youzi.fastnews.entity.PacRuleResp;
+import com.youzi.fastnews.entity.PacRuleRespD;
 import com.youzi.fastnews.entity.RegisterResponseEntity;
 import com.youzi.fastnews.entity.ResponseWechatLoginEntity;
 import com.youzi.fastnews.entity.ResponseWechatUserInfoEntity;
@@ -385,5 +390,48 @@ public class NetManager implements Constants {
                 })
                 .Failed(msg -> callback.Failed((String) msg))
                 .get(mContext, mHandler);
+    }
+
+    public void asyncConfig() {
+        new RequestHelper<ConfigRespD>().Method(RequestHelper.Method.GET)
+                .Result(ConfigRespD.class).Url(MAIN_URL + "/api/app/configs")
+                .Success(result-> {
+                    if (((ConfigRespD)result).getCode() != 0) {
+                    } else {
+                        App.sPacCnt = ((ConfigRespD) result).getData().getView_article_countdown();
+                    }
+                }).get(mContext, mHandler);
+    }
+
+    /*
+    http://www.yz064.com/api/userlottery/draw
+     */
+    public void doDraw(INetCallback<DrawResp> callback) {
+        new RequestHelper<DrawRespD>().Method(RequestHelper.Method.GET)
+                .Result(DrawRespD.class).Url(MAIN_URL + "/api/userlottery/draw")
+                .UrlParam("logged_token", App.getToken(), true)
+                .UrlParam("is_draw", System.currentTimeMillis() % 2 + "")
+                .Success(result -> {
+                    if (((DrawRespD)result).getCode() != 0) {
+                        callback.Failed(((DrawRespD)result).getMsg());
+                    } else {
+                        callback.Success(((DrawRespD)result).getData());
+                    }
+                })
+                .Failed(msg -> callback.Failed((String) msg))
+                .get(mContext, mHandler);
+    }
+
+    public void getPacRule(INetCallback<PacRuleResp> callback) {
+        new RequestHelper<PacRuleRespD>().Url(MAIN_URL + "/api/user/lottery_rule")
+                .Method(RequestHelper.Method.GET)
+                .Result(PacRuleRespD.class)
+                .Success(result -> {
+                    if (((PacRuleRespD)result).getCode() != 0) {
+                        callback.Failed(((PacRuleRespD)result).getMsg());
+                    } else {
+                        callback.Success(((PacRuleRespD)result).getData());
+                    }
+                }).Failed(msg -> callback.Failed((String) msg)).get(mContext, mHandler);
     }
 }

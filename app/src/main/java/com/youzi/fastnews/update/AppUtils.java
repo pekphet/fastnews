@@ -24,7 +24,7 @@ public class AppUtils {
     }
 
     public static String getMetaChannel(Context context) {
-        return  getMetaData(context).getString("");
+        return  getMetaData(context).getString("UMENG_CHANNEL");
     }
 
     public static int getVersionCode(Context context){

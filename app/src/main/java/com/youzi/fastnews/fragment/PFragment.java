@@ -15,6 +15,7 @@ import com.youzi.fastnews.activity.ApplyWithdrawalsActivity;
 import com.youzi.fastnews.activity.HomeActivity;
 import com.youzi.fastnews.activity.InviteFriendsActivity;
 import com.youzi.fastnews.activity.InviteRankActivity;
+import com.youzi.fastnews.activity.PacActivity;
 import com.youzi.fastnews.activity.ShareActivity;
 import com.youzi.fastnews.activity.ShareRankActivity;
 import com.youzi.fastnews.entity.TXListResp;
@@ -23,6 +24,7 @@ import com.youzi.fastnews.net.INetCallback;
 import com.youzi.fastnews.utils.WechatUtils;
 
 import cc.fish.coreui.BaseFragment;
+
 
 /**
  * Created by fish on 16-12-21.
@@ -34,6 +36,7 @@ public class PFragment extends BaseFragment {
     private LinearLayout mLlInviteR;
     private LinearLayout mLlShare;
     private LinearLayout mLlShareR;
+    private LinearLayout mLlPac;
     private Button btn_get_money;
     private TextView apply_during_tv;
     private TextView per_login_tv;
@@ -50,6 +53,7 @@ public class PFragment extends BaseFragment {
         mLlInviteR  = (LinearLayout) v.findViewById(R.id.ll_invite_r);
         mLlShare    = (LinearLayout) v.findViewById(R.id.ll_sh);
         mLlShareR   = (LinearLayout) v.findViewById(R.id.ll_sh_r);
+        mLlPac   = (LinearLayout) v.findViewById(R.id.ll_pac);
         btn_get_money = (Button) v.findViewById(R.id.btn_get_money);
         apply_during_tv = (TextView) v.findViewById(R.id.apply_during_tv);
         per_login_tv = (TextView) v.findViewById(R.id.per_login_tv);
@@ -61,6 +65,7 @@ public class PFragment extends BaseFragment {
         mLlInviteR.setOnClickListener(this);
         mLlShare.setOnClickListener(this);
         mLlShareR.setOnClickListener(this);
+        mLlPac.setOnClickListener(this);
         btn_get_money.setOnClickListener(this);
         apply_during_tv.setOnClickListener(this);
         //per_login_tv.setOnClickListener(this);
@@ -118,7 +123,7 @@ public class PFragment extends BaseFragment {
         App.getNetManager().getYuE(new INetCallback<YUEResp>() {
             @Override
             public void Success(YUEResp yueResp) {
-                mTvMoney.setText(yueResp.getMoney() + "");
+                mTvMoney.setText(String.format("%.2f",yueResp.getMoney()));
             }
 
             @Override
@@ -144,6 +149,9 @@ public class PFragment extends BaseFragment {
             case R.id.ll_sh_r:
                 startActivity(new Intent(getActivity(), ShareRankActivity.class));
                 break;
+            case R.id.ll_pac:
+                startActivity(new Intent(getActivity(), PacActivity.class));
+                break;
             case R.id.btn_get_money:
                 startActivity(new Intent(getActivity(), ApplyWithdrawalsActivity.class));
                 break;
@@ -164,6 +172,6 @@ public class PFragment extends BaseFragment {
         if (!App.isLogIn()) {
             HomeActivity.sel(0);
         }
-        mTvMoney.setText(App.sYUE + "");
+        mTvMoney.setText(String.format("%.2f",App.sYUE));
     }
 }

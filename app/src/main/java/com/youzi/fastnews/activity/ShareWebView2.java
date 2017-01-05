@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -12,11 +15,15 @@ import android.widget.TextView;
 
 import com.youzi.fastnews.App;
 import com.youzi.fastnews.R;
+import com.youzi.fastnews.entity.DrawResp;
 import com.youzi.fastnews.entity.FeedResp;
 import com.youzi.fastnews.global.WechatConstants;
 import com.youzi.fastnews.net.INetCallback;
 import com.youzi.fastnews.utils.WechatUtils;
 import com.youzi.fastnews.utils.ZToast;
+import com.youzi.fastnews.view.PacDialogUtils;
+
+import static android.view.View.GONE;
 
 /**
  * Created by fish on 16-12-27.
@@ -33,6 +40,11 @@ public class ShareWebView2 extends Activity {
     private int mCat1;
     private int mCat2;
     private String mUrl;
+    private TextView mTvPac;
+
+    private int mPacCount = App.sPacCnt;
+    private Handler mHandler = new Handler(Looper.myLooper());
+    private boolean isPause = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +54,9 @@ public class ShareWebView2 extends Activity {
         mBtn = (TextView) findViewById(R.id.btn_share);
         mBtnRt = (ImageButton) findViewById(R.id.btn_retn);
         mBtnFr = (TextView) findViewById(R.id.btn_s2fr);
-
+        mTvPac = (TextView) findViewById(R.id.btn_pac);
+        findViewById(R.id.ll_dt_pac).setVisibility(View.VISIBLE);
+        initPacBtn();
         initWebView();
         mCat1 = getIntent().getIntExtra("CATEGORY1", -1);
         mCat2 = getIntent().getIntExtra("CATEGORY2", -1);
@@ -58,9 +72,50 @@ public class ShareWebView2 extends Activity {
         loadShareUrl();
     }
 
+    private void initPacBtn() {
+        mTvPac.setEnabled(false);
+        countPacBtn();
+    }
+
+    private void countPacBtn() {
+        if (mPacCount > 0) {
+            if (mHandler == null) {
+                return;
+            }
+            mTvPac.setText(mPacCount + "s");
+            mTvPac.setBackgroundResource(R.drawable.dt_pac_un);
+            mHandler.postDelayed(()-> countPacBtn(), 1000);
+            mPacCount --;
+        } else {
+            mTvPac.setEnabled(true);
+            mTvPac.setText("");
+            mTvPac.setBackgroundResource(R.drawable.dt_pac_en);
+            mTvPac.setOnClickListener(v->{
+                doDraw();
+                findViewById(R.id.ll_dt_pac).setVisibility(GONE);
+            });
+        }
+    }
+
+    private void doDraw() {
+        if(App.isLogIn()) {
+            App.getNetManager().doDraw(new INetCallback<DrawResp>() {
+                @Override
+                public void Success(DrawResp drawResp) {
+                    PacDialogUtils.showDialog(ShareWebView2.this, drawResp);
+                }
+                @Override
+                public void Failed(String msg) {
+                    ZToast.r(ShareWebView2.this, msg);
+                }
+            });
+        } else {
+            ImmediatelyLoginActivity.doLogin(ShareWebView2.this);
+        }
+    }
+
     private void checkLogin() {
         if (App.isLogIn()) {
-            mBtnFr.setText("转发到朋友圈");
             mBtnFr.setOnClickListener(v-> {
                 sent2FR();
             });
@@ -72,13 +127,11 @@ public class ShareWebView2 extends Activity {
     }
 
     private void loadShareUrl() {
-        mBtnFr.setText("正在获取分享连接");
         mBtnFr.setEnabled(false);
         App.getNetManager().transUrl(getIntent().getStringExtra("URL"), mCat1, mCat2, new INetCallback<FeedResp>() {
             @Override
             public void Success(FeedResp f) {
                 mBtnFr.setEnabled(true);
-                mBtnFr.setText("转发到朋友圈");
                 App.sCFID = f.getId();
                 sUrl = f.getShare_link().replace("{logged_token}", App.getToken());
                 sCon = f.getShare_title();
@@ -89,7 +142,6 @@ public class ShareWebView2 extends Activity {
             @Override
             public void Failed(String msg) {
                 ZToast.r(ShareWebView2.this, msg);
-                mBtnFr.setText("获取分享连接失败");
             }
         });
     }
@@ -129,12 +181,15 @@ public class ShareWebView2 extends Activity {
     protected void onPause() {
         super.onPause();
         mWb.loadUrl("about:blank");
+        isPause = true;
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mWb.loadUrl(mUrl);
+        if (isPause) {
+            mWb.loadUrl(mUrl);
+        }
     }
 
     @Override

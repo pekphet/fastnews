@@ -42,7 +42,12 @@ public class HomeActivity extends BaseFragmentActivity {
         setContentView(R.layout.a_h);
         self = this;
         checkUpdate();
+        initConfig();
         super.onCreate(savedInstanceState);
+    }
+
+    private void initConfig() {
+        App.getNetManager().asyncConfig();
     }
 
     private void checkUpdate() {

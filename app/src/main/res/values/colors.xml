@@ -98,4 +98,10 @@
     <color name="blue_btn">#545eee</color>
     <color name="blue_btn_checked">#434bbe</color>
 
+    <color name="red_btn">#ee5e54</color>
+    <color name="red_btn_checked">#be4b43</color>
+    <color name="red_btn_unused">#999999</color>
+
+    <color name="dlg_win_bg">#33333333</color>
+
 </resources>

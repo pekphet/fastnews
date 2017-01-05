@@ -22,7 +22,7 @@ public class PacActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.a_pac);
         TextView tvHead = (TextView) findViewById(R.id.tv_head);
-        tvHead.setText("阅读红包");
+        tvHead.setText("阅读寻宝");
         findViewById(R.id.btn_ret).setOnClickListener(bv->finish());
         mTvCon = (TextView) findViewById(R.id.tv_p_pac_ct);
         initContent();

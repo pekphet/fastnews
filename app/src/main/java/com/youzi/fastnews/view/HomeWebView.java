@@ -44,6 +44,7 @@ public class HomeWebView extends WebView{
         settings.setUseWideViewPort(true);
         settings.setLoadWithOverviewMode(true);
         settings.setRenderPriority(WebSettings.RenderPriority.HIGH);
+        settings.setBlockNetworkImage(false);
         setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {

@@ -410,7 +410,7 @@ public class NetManager implements Constants {
         new RequestHelper<DrawRespD>().Method(RequestHelper.Method.GET)
                 .Result(DrawRespD.class).Url(MAIN_URL + "/api/userlottery/draw")
                 .UrlParam("logged_token", App.getToken(), true)
-                .UrlParam("is_draw", System.currentTimeMillis() % 2 + "")
+//                .UrlParam("is_draw", System.currentTimeMillis() % 2 + "")
                 .Success(result -> {
                     if (((DrawRespD)result).getCode() != 0) {
                         callback.Failed(((DrawRespD)result).getMsg());

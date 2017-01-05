@@ -23,6 +23,8 @@ import com.youzi.fastnews.utils.WechatUtils;
 import com.youzi.fastnews.utils.ZToast;
 import com.youzi.fastnews.view.PacDialogUtils;
 
+import cc.fish.fishhttp.util.ZLog;
+
 import static android.view.View.GONE;
 
 /**
@@ -65,6 +67,7 @@ public class ShareWebView2 extends Activity {
         }
         mUrl = getIntent().getStringExtra("URL");
         mWb.loadUrl(mUrl);
+        ZLog.e("webview load", mUrl);
         mBtn.setOnClickListener(v->startActivity(new Intent(this, ShareActivity.class)));
         mBtnRt.setOnClickListener(v->finish());
         mBtnFr.setOnClickListener(v->sent2FR());
@@ -159,6 +162,7 @@ public class ShareWebView2 extends Activity {
         settings.setAllowFileAccess(true);
         settings.setUseWideViewPort(true);
         settings.setLoadWithOverviewMode(true);
+        settings.setBlockNetworkImage(false);
         settings.setRenderPriority(WebSettings.RenderPriority.HIGH);
         mWb.setWebViewClient(new WebViewClient(){
             @Override

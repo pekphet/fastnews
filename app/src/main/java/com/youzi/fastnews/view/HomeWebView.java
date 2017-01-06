@@ -10,6 +10,8 @@ import android.webkit.WebViewClient;
 import com.youzi.fastnews.activity.ShareWebView2;
 import com.youzi.fastnews.fragment.N2Fragment;
 
+import cc.fish.fishhttp.util.ZLog;
+
 /**
  * Created by fish on 16-12-27.
  */
@@ -33,6 +35,7 @@ public class HomeWebView extends WebView{
     @Override
     public void loadUrl(String url) {
         super.loadUrl(url);
+        ZLog.e("HOME WEBVIEW ", url);
     }
 
     private void initWebview(){
@@ -45,10 +48,12 @@ public class HomeWebView extends WebView{
         settings.setLoadWithOverviewMode(true);
         settings.setRenderPriority(WebSettings.RenderPriority.HIGH);
         settings.setBlockNetworkImage(false);
+        settings.setDomStorageEnabled(true);
         setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 ShareWebView2.startWeb2Activity(getContext(), url, N2Fragment.gCategory1, N2Fragment.gCategory2);
+//                view.loadUrl(url);
                 return true;
             }
         });
@@ -62,4 +67,5 @@ public class HomeWebView extends WebView{
         }
         return super.onKeyDown(keyCode, event);
     }
+
 }

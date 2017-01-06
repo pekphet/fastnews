@@ -3,10 +3,12 @@ package com.youzi.fastnews.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.http.SslError;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -68,6 +70,7 @@ public class ShareWebView2 extends Activity {
         mUrl = getIntent().getStringExtra("URL");
         mWb.loadUrl(mUrl);
         ZLog.e("webview load", mUrl);
+//        ZLog.e("webview load true", mUrl.split("\\?")[0]);
         mBtn.setOnClickListener(v->startActivity(new Intent(this, ShareActivity.class)));
         mBtnRt.setOnClickListener(v->finish());
         mBtnFr.setOnClickListener(v->sent2FR());
@@ -164,11 +167,20 @@ public class ShareWebView2 extends Activity {
         settings.setLoadWithOverviewMode(true);
         settings.setBlockNetworkImage(false);
         settings.setRenderPriority(WebSettings.RenderPriority.HIGH);
+        settings.setSupportMultipleWindows(true);
+        settings.setAllowContentAccess(true);
+        settings.setDomStorageEnabled(true);
         mWb.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
                 return true;
+            }
+
+            @Override
+            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+//                super.onReceivedSslError(view, handler, error);
+                handler.proceed();
             }
         });
     }

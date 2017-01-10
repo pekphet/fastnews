@@ -48,7 +48,7 @@ public class HomeWebView extends WebView{
         settings.setLoadWithOverviewMode(true);
         settings.setRenderPriority(WebSettings.RenderPriority.HIGH);
         settings.setBlockNetworkImage(false);
-        settings.setDomStorageEnabled(true);
+//        settings.setDomStorageEnabled(true);
         setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -62,8 +62,8 @@ public class HomeWebView extends WebView{
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK) && canGoBack()) {
-            goBack();
-            return true;
+//            goBack();
+            return false;
         }
         return super.onKeyDown(keyCode, event);
     }

@@ -42,4 +42,41 @@ public class ZLog {
         }
     }
 
+
+    /* --LOG WITH RETURN----------------------------------------------------------------*/
+    public static String sv(String tag, String msg) {
+        if (VERBOSE) {
+            Log.v("ZLOG:" + tag, msg);
+        }
+        return msg;
+    }
+
+    public static String sd(String tag, String msg) {
+        if (DEBUG) {
+            Log.d("ZLOG:" + tag, msg);
+        }
+        return msg;
+    }
+
+    public static String si(String tag, String msg) {
+        if (INFO) {
+            Log.i("ZLOG:" + tag, msg);
+        }
+        return msg;
+    }
+
+    public static String sw(String tag, String msg) {
+        if (WARNING) {
+            Log.w("ZLOG:" + tag, msg);
+        }
+        return msg;
+    }
+
+    public static String se(String tag, String msg) {
+        if (ERROR) {
+            Log.e("ZLOG:" + tag, msg);
+        }
+        return msg;
+    }
+
 }

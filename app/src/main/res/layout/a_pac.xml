@@ -9,21 +9,35 @@
         layout="@layout/p_head_simple"
         android:layout_width="match_parent"
         android:layout_height="50dp"/>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="5dp"
         android:background="#f4f5f6"/>
-    <ImageView
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        android:src="@drawable/pac_rl"/>
-    <TextView
-        android:id="@+id/tv_p_pac_ct"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"/>
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@drawable/pac_rl"/>
+
+        <TextView
+            android:id="@+id/tv_p_pac_ct"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"/>
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

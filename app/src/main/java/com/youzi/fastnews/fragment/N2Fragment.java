@@ -38,10 +38,15 @@ public class N2Fragment extends BaseFragment {
     public static int gCategory1 = 1;
     public static int gCategory2 = 0;
 
+    private static N2Fragment self = null;
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if (self == null) {
+            self = this;
+        }
         initOnce();
         return super.onCreateView(inflater, container, savedInstanceState);
     }
@@ -157,5 +162,26 @@ public class N2Fragment extends BaseFragment {
         return w / pieces;
     }
 
+    public static void moveItem(MoveAct act) {
+        switch (act) {
+            case LEFT:
+                if (self.ccl > 0) {
+                    self.onItemClick(self.mLlBtnGrp.getChildAt(self.ccl - 1), self.ccl - 1);
+                    self.mWbH.loadUrl(self.mNList.getRows().get(self.ccl).getLink());
+                }
+                break;
+            case RIGHT:
+                if (self.ccl < self.mNList.getRows().size() - 1) {
+                    self.onItemClick(self.mLlBtnGrp.getChildAt(self.ccl + 1), self.ccl + 1);
+                    self.mWbH.loadUrl(self.mNList.getRows().get(self.ccl).getLink());
+                }
+                break;
+        }
+    }
+
+    public enum MoveAct {
+        LEFT,
+        RIGHT,
+    }
 
 }

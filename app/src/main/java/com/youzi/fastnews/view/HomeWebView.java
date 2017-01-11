@@ -17,6 +17,10 @@ import cc.fish.fishhttp.util.ZLog;
  */
 
 public class HomeWebView extends WebView{
+
+    private float mRawX;
+    private float mRawY;
+
     public HomeWebView(Context context) {
         super(context);
         initWebview();
@@ -68,4 +72,42 @@ public class HomeWebView extends WebView{
         return super.onKeyDown(keyCode, event);
     }
 
+//    @Override
+//    public boolean onTouchEvent(MotionEvent event) {
+//        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+//            mRawX = event.getRawX();
+//            mRawY = event.getRawY();
+//            ZLog.e("down hw,x", mRawX + "");
+//            ZLog.e("down hw,y", mRawY + "");
+//            requestDisallowInterceptTouchEvent(true);
+//            return true;
+//        }
+//        if (event.getAction() == MotionEvent.ACTION_UP) {
+//            float mUpX = event.getRawX();
+//            float mUpY = event.getRawY();
+//            requestDisallowInterceptTouchEvent(false);
+//            ZLog.e("up hw,x", mUpX + "");
+//            ZLog.e("up hw,y", mUpY + "");
+//            if (Math.abs(mUpY - mRawY) < 50.0) {
+//                if (mUpX - mRawX > 100.0) {
+//                    N2Fragment.moveItem(N2Fragment.MoveAct.LEFT);
+//                } else if (mRawX - mUpX > 100.0) {
+//                    N2Fragment.moveItem(N2Fragment.MoveAct.RIGHT);
+//                }
+//                return true;
+//            } else {
+//                return false;
+//            }
+//        }
+//        if (event.getAction() == MotionEvent.ACTION_MOVE) {
+//            if (mRawY != 0.0 && Math.abs(event.getRawY() - mRawY) > 50) {
+//                requestDisallowInterceptTouchEvent(false);
+//                mRawY = 0.0f;
+//                mRawX = 0.0f;
+//                return true;
+//            }
+//        }
+//        requestDisallowInterceptTouchEvent(false);
+//        return super.onGenericMotionEvent(event);
+//    }
 }
